@@ -494,22 +494,51 @@
   .modal-close:hover { border-color: var(--c-cream); color: var(--c-cream); }
 
   .modal-body {
-    padding: 22px;
+    padding: 24px;
     overflow-y: auto;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.92rem;
+    line-height: 1.65;
     color: #d6e2e7;
+  }
+
+  .modal-meta {
+    background: rgba(30, 64, 79, 0.35);
+    border-left: 3px solid var(--c-cream);
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    font-size: 0.88rem;
+    color: var(--text-white);
   }
 
   .modal-body h3 {
     font-family: var(--font-pixel);
-    font-size: 0.62rem;
-    color: var(--c-red);
+    font-size: 0.66rem;
+    color: var(--c-amber);
     letter-spacing: 1px;
-    margin: 18px 0 8px;
+    margin: 24px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed rgba(52, 104, 92, 0.6);
   }
 
-  .modal-body h3:first-child { margin-top: 0; }
+  .modal-body h4 {
+    font-family: var(--font-pixel);
+    font-size: 0.58rem;
+    color: var(--c-red);
+    letter-spacing: 1px;
+    margin: 16px 0 8px;
+  }
+
+  .modal-body p {
+    margin-bottom: 8px;
+  }
+
+  .modal-body ul {
+    margin: 8px 0 12px 20px;
+  }
+
+  .modal-body li {
+    margin-bottom: 6px;
+  }
 
   .modal-footer { padding: 16px 22px; border-top: 2px solid rgba(52, 104, 92, 0.6); text-align: right; }
 
@@ -684,20 +713,129 @@
   <div class="modal-overlay" id="terms-modal" role="dialog" aria-modal="true" aria-labelledby="terms-title">
     <div class="modal">
       <div class="modal-header">
-        <h2 id="terms-title">TÉRMINOS Y CONDICIONES</h2>
+        <h2 id="terms-title">TÉRMINOS Y CONDICIONES DE USO DEL SERVIDOR “KOULENI”</h2>
         <button type="button" class="modal-close" id="close-terms" aria-label="Cerrar">✕</button>
       </div>
       <div class="modal-body">
-        <h3>1. ACEPTACIÓN</h3>
-        <p>Texto de prueba. Al enviar una solicitud de entrada a Kouneli aceptas estas condiciones de uso.</p>
-        <h3>2. CONDUCTA</h3>
-        <p>Texto de prueba. Se espera respeto hacia todos los jugadores y moderadores. No se permite el uso de hacks, exploits ni lenguaje ofensivo.</p>
-        <h3>3. CONSTRUCCIONES</h3>
-        <p>Texto de prueba. El grifeo y robo de construcciones ajenas está prohibido.</p>
-        <h3>4. SANCIONES</h3>
-        <p>Texto de prueba. El incumplimiento de las normas puede resultar en la expulsión temporal o permanente del servidor.</p>
-        <h3>5. CAMBIOS</h3>
-        <p>Texto de prueba. Estos términos pueden actualizarse en cualquier momento.</p>
+        <div class="modal-meta">
+          <p><strong>Fecha de última actualización:</strong> 17/10/2026</p>
+          <p style="margin-bottom: 0;"><strong>Versión:</strong> 1.0</p>
+        </div>
+
+        <h3 style="margin-top: 0;">PREÁMBULO</h3>
+        <p>Los presentes Términos y Condiciones de Uso (en adelante, los “Términos”) regulan el acceso y la utilización del servidor de Minecraft denominado “Kouleni” (en adelante, el “Servidor”) y de su comunidad oficial alojada en la plataforma Discord (en adelante, la “Comunidad”), administrados por Cristopher Emma Xulu, conocido públicamente como “Rosx” (en adelante, la “Administración”).</p>
+        <p>Toda persona que acceda al Servidor o a la Comunidad (en adelante, el “Usuario”) deberá leer detenidamente estos Términos. El ingreso, registro o participación en cualquiera de ellos constituye la aceptación plena, voluntaria e incondicional de lo aquí dispuesto.</p>
+
+        <h3>CAPÍTULO I. DISPOSICIONES GENERALES</h3>
+
+        <h4>Artículo 1. Aceptación de los Términos</h4>
+        <p>1.1. El Usuario reconoce haber leído, comprendido y aceptado la totalidad de estos Términos.</p>
+        <p>1.2. Quien no esté de acuerdo con alguna de sus disposiciones deberá abstenerse de acceder al Servidor y a la Comunidad.</p>
+        <p>1.3. El desconocimiento de los Términos no exime de su cumplimiento ni de las sanciones que correspondan.</p>
+
+        <h4>Artículo 2. Requisito de edad</h4>
+        <p>2.1. El Servidor está dirigido exclusivamente a personas mayores de diecisiete (17) años.</p>
+        <p>2.2. Al ingresar, el Usuario declara bajo su responsabilidad cumplir con dicho requisito.</p>
+        <p>2.3. La Administración se reserva el derecho de expulsar a cualquier Usuario que incumpla este requisito o que haya proporcionado información falsa sobre su edad, sin que ello genere derecho a compensación alguna.</p>
+
+        <h4>Artículo 3. Definiciones</h4>
+        <p>Para los efectos de estos Términos se entenderá por:</p>
+        <ul>
+          <li><strong>Infraestructura:</strong> servidores de juego, servidor de Discord, bots, plugins, bases de datos, redes y demás servicios asociados al Servidor.</li>
+          <li><strong>Moderación:</strong> el equipo designado por la Administración para velar por el cumplimiento de estas normas.</li>
+          <li><strong>Griefing:</strong> la destrucción, alteración, saqueo o modificación de construcciones o bienes ajenos, o cualquier acción realizada con el propósito de perjudicar o molestar a otros Usuarios.</li>
+          <li><strong>Exploit:</strong> el aprovechamiento de errores, fallos o vulnerabilidades del juego o de sus sistemas para obtener ventajas no previstas.</li>
+        </ul>
+
+        <h3>CAPÍTULO II. NORMAS DE CONDUCTA</h3>
+
+        <h4>Artículo 4. Protección de la infraestructura</h4>
+        <p>4.1. Queda estrictamente prohibido realizar cualquier acto malicioso contra la Infraestructura, incluyendo, sin limitarse a: ataques de denegación de servicio (DoS/DDoS), intentos de acceso no autorizado, sobrecarga intencional de recursos, difusión de software malicioso y spam masivo.</p>
+        <p>4.2. La Administración podrá imponer sanciones permanentes y, cuando proceda, ejercer las acciones legales correspondientes.</p>
+
+        <h4>Artículo 5. Convivencia y respeto entre Usuarios</h4>
+        <p>5.1. Se prohíbe todo acto perjudicial hacia otros Usuarios, tanto dentro del juego como en la Comunidad.</p>
+        <p>5.2. Se prohíbe cualquier conducta provocativa, hostil, discriminatoria, intimidatoria o de acoso. Según la gravedad y la reincidencia, la Administración aplicará una advertencia o un baneo.</p>
+        <p>5.3. Se prohíbe el griefing y cualquier acción cuyo fin sea molestar o entorpecer la experiencia de los demás.</p>
+
+        <h4>Artículo 6. Robos y bromas</h4>
+        <p>6.1. Se prohíbe el robo de objetos o recursos y toda broma que pueda resultar perjudicial.</p>
+        <p>6.2. Cualquier interacción de esta naturaleza solo se considerará válida cuando exista consentimiento previo y expreso de todas las partes involucradas. En ausencia de dicho consentimiento, la conducta será sancionada.</p>
+
+        <h4>Artículo 7. Contenido de índole sexual</h4>
+        <p>7.1. Queda prohibido todo contenido, lenguaje, conducta, construcción, imagen, skin o material de naturaleza sexual, tanto en el Servidor como en la Comunidad.</p>
+
+        <h4>Artículo 8. Integridad del juego, modificaciones y vulnerabilidades</h4>
+        <p>8.1. No se permiten modificaciones al modpack distintas de las autorizadas por la Administración. Se prohíbe el uso de hacks, clientes con ventajas, mods adicionales no aprobados y exploits.</p>
+        <p>8.2. Se prohíbe buscar o aprovechar vulnerabilidades, errores o fallos con fines maliciosos o de beneficio personal.</p>
+        <p>8.3. El Usuario que descubra una vulnerabilidad deberá reportarla a la Moderación mediante un ticket, absteniéndose de utilizarla o divulgarla.</p>
+        <p>8.4. La Administración podrá revertir o eliminar objetos, estructuras o progreso obtenidos mediante el incumplimiento de esta cláusula.</p>
+
+        <h3>CAPÍTULO III. ASPECTOS COMERCIALES</h3>
+
+        <h4>Artículo 9. Prohibición de comercialización</h4>
+        <p>9.1. Queda prohibida la compraventa, intercambio o comercialización, mediante dinero real, de objetos, estructuras, cuentas, servicios o cualquier elemento vinculado al Servidor.</p>
+
+        <h4>Artículo 10. Donaciones</h4>
+        <p>10.1. La Administración no exige pago alguno para acceder al Servidor ni para participar en la Comunidad.</p>
+        <p>10.2. Las donaciones son estrictamente voluntarias y quedan a la libre decisión de cada Usuario.</p>
+        <p>10.3. Las donaciones no conceden ventajas dentro del juego, trato preferente, exención de las normas ni derecho a reembolso.</p>
+        <p>10.4. Ningún miembro de la Moderación está autorizado a solicitar pagos. Cualquier solicitud en ese sentido deberá reportarse de inmediato a la Administración.</p>
+
+        <h3>CAPÍTULO IV. MODERACIÓN, SOPORTE Y SANCIONES</h3>
+
+        <h4>Artículo 11. Moderación</h4>
+        <p>11.1. El Usuario deberá mantener una actitud de respeto y tolerancia hacia el equipo de Moderación.</p>
+        <p>11.2. La Moderación no podrá obligar ni forzar a ningún Usuario a participar en interacciones, con el fin de garantizar una convivencia natural y voluntaria.</p>
+        <p>11.3. Las decisiones de la Moderación se adoptarán conforme a su criterio razonable, considerando la gravedad de cada caso. La ausencia de mención expresa de una conducta en estos Términos no impedirá su sanción cuando afecte la seguridad, el orden o la convivencia del Servidor.</p>
+
+        <h4>Artículo 12. Soporte y resolución de dudas</h4>
+        <p>12.1. Toda duda, reclamo, reporte o solicitud deberá canalizarse exclusivamente mediante la apertura de un ticket en el servidor oficial de Discord.</p>
+        <p>12.2. No se atenderán consultas realizadas a través del chat del juego, de los canales generales de la Comunidad ni de mensajes directos al personal de Moderación, a fin de evitar interrupciones en sus labores.</p>
+
+        <h4>Artículo 13. Sanciones</h4>
+        <p>13.1. Según la gravedad y la reincidencia, las sanciones podrán consistir en: advertencia, silenciamiento, expulsión temporal, baneo temporal o permanente, y reversión de progreso o bienes.</p>
+        <p>13.2. En casos graves, la Administración podrá aplicar sanciones sin previo aviso.</p>
+        <p>13.3. La evasión de una sanción, incluido el uso de cuentas alternas, será causal de baneo permanente de todas las cuentas involucradas.</p>
+
+        <h4>Artículo 14. Revisión de sanciones</h4>
+        <p>14.1. El Usuario sancionado podrá solicitar la revisión de la medida mediante un ticket, de forma respetuosa y fundamentada.</p>
+        <p>14.2. Las ofensas, amenazas o presiones hacia la Moderación durante este proceso podrán agravar la sanción.</p>
+        <p>14.3. La decisión final corresponderá a la Administración.</p>
+
+        <h3>CAPÍTULO V. DATOS, RESPONSABILIDAD Y DISPOSICIONES FINALES</h3>
+
+        <h4>Artículo 15. Privacidad y tratamiento de datos</h4>
+        <p>15.1. Para el funcionamiento del Servidor podrán registrarse datos como: nombre de usuario de Minecraft, identificador de Discord, dirección IP, registros de chat y registros de actividad.</p>
+        <p>15.2. Dichos datos se utilizarán únicamente con fines de moderación, seguridad y operación del Servidor, y no serán vendidos ni cedidos a terceros, salvo requerimiento de autoridad competente.</p>
+        <p>15.3. El Usuario es responsable de no divulgar información personal sensible en espacios públicos.</p>
+
+        <h4>Artículo 16. Propiedad intelectual y no afiliación</h4>
+        <p>16.1. Kouleni es un proyecto independiente y no está afiliado, respaldado ni patrocinado por Mojang Studios ni Microsoft Corporation. “Minecraft” es una marca de sus respectivos titulares.</p>
+        <p>16.2. El uso del Servidor queda sujeto, además, al Acuerdo de Licencia de Usuario Final (EULA) y a las directrices de uso comercial de Minecraft.</p>
+        <p>16.3. Las construcciones y creaciones realizadas en el Servidor forman parte de un entorno comunitario. La Administración podrá conservar, modificar o eliminar contenido del mundo cuando resulte necesario.</p>
+
+        <h4>Artículo 17. Disponibilidad del servicio y limitación de responsabilidad</h4>
+        <p>17.1. El Servidor se ofrece “tal cual” y “según disponibilidad”, sin garantía de funcionamiento ininterrumpido. Podrán producirse mantenimientos, reinicios, interrupciones o pérdida de datos.</p>
+        <p>17.2. La Administración realizará esfuerzos razonables para respaldar la información, pero no garantiza la conservación permanente de construcciones, objetos o progreso.</p>
+        <p>17.3. La Administración no será responsable de las interacciones entre Usuarios, de los daños derivados del uso de software de terceros, ni de las conductas ocurridas fuera de sus canales oficiales.</p>
+
+        <h4>Artículo 18. Modificación de los Términos</h4>
+        <p>18.1. La Administración podrá modificar estos Términos en cualquier momento. Los cambios se comunicarán a través del Discord oficial.</p>
+        <p>18.2. El uso continuado del Servidor tras la publicación de los cambios implicará su aceptación.</p>
+
+        <h4>Artículo 19. Terminación del acceso</h4>
+        <p>19.1. La Administración podrá suspender o cancelar el acceso de cualquier Usuario que incumpla estos Términos.</p>
+        <p>19.2. El Usuario podrá dejar de utilizar el Servidor en cualquier momento.</p>
+
+        <h4>Artículo 20. Divisibilidad</h4>
+        <p>20.1. Si alguna disposición de estos Términos fuese declarada nula o inaplicable, las demás conservarán plena validez y vigencia.</p>
+
+        <h4>Artículo 21. Legislación aplicable</h4>
+        <p>21.1. Estos Términos se regirán e interpretarán conforme a las leyes de la República de Guatemala, sin perjuicio de las normas imperativas del país de residencia del Usuario.</p>
+
+        <h4>Artículo 22. Contacto</h4>
+        <p>Para cualquier consulta relacionada con estos Términos, el Usuario deberá abrir un ticket en el servidor oficial de Discord de Kouleni.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="modal-ok" id="ok-terms">ENTENDIDO</button>
