@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Paleta de colores Kouneli */
     --c-red: #CC2132;
     --c-orange: #E6692A;
     --c-amber: #ED9530;
@@ -18,7 +17,6 @@
     --c-teal: #34685C;
     --c-midnight: #1E404F;
 
-    /* Base oscura */
     --bg: #142831;
     --bg-dark: #0d1b22;
     --bg-box: #0a171d;
@@ -47,7 +45,6 @@
       radial-gradient(circle at 15% 80%, rgba(237, 149, 48, 0.08) 0%, transparent 50%);
   }
 
-  /* ===== ESTRELLAS ===== */
   .stars-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 
   .star {
@@ -62,7 +59,6 @@
     100% { transform: scale(1.6); opacity: 0.95; }
   }
 
-  /* ===== FONDO SUPERIOR ===== */
   .header-bg-hero {
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -92,7 +88,6 @@
       linear-gradient(180deg, transparent 40%, rgba(20, 40, 49, 0.7) 72%, var(--bg) 100%);
   }
 
-  /* ===== NAVEGACIÓN ===== */
   nav {
     position: relative;
     z-index: 10;
@@ -146,7 +141,6 @@
 
   .nav-btn-back:hover { background: var(--c-teal); border-color: #ffffff; color: var(--c-cream); }
 
-  /* ===== CONTENIDO PRINCIPAL ===== */
   main {
     position: relative;
     z-index: 2;
@@ -178,7 +172,6 @@
     text-shadow: 3px 3px 0 #000000;
   }
 
-  /* ===== RECUADRO DE LISTA ===== */
   .members-box {
     background: var(--bg-box);
     border: 3px solid var(--border-box);
@@ -216,7 +209,6 @@
     letter-spacing: 1px;
   }
 
-  /* Lista ordenada */
   ol.members-list {
     list-style: none;
     display: flex;
@@ -295,7 +287,6 @@
     flex-shrink: 0;
   }
 
-  /* ===== FOOTER ===== */
   footer {
     position: relative;
     z-index: 10;
@@ -385,7 +376,6 @@
       const list = [...BASE_ADMITTED];
       const seen = new Set(list.map(n => n.toLowerCase()));
 
-      // Leer miembros registrados con su formato original
       const storedMembers = JSON.parse(localStorage.getItem('kouneli_members') || '[]');
       storedMembers.forEach(entry => {
         const nick = typeof entry === 'string' ? entry : entry.nick;
@@ -395,7 +385,6 @@
         }
       });
 
-      // Respaldo: incluir también registros previos en kouneli_pending
       const storedPending = JSON.parse(localStorage.getItem('kouneli_pending') || '[]');
       storedPending.forEach(nick => {
         if (nick && !seen.has(nick.toLowerCase())) {
@@ -444,4 +433,3 @@
   </script>
 </body>
 </html>
-

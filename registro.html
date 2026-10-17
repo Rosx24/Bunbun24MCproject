@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Paleta de colores Kouneli */
     --c-red: #CC2132;
     --c-orange: #E6692A;
     --c-amber: #ED9530;
@@ -18,7 +17,6 @@
     --c-teal: #34685C;
     --c-midnight: #1E404F;
 
-    /* Base oscura */
     --bg: #142831;
     --bg-dark: #0d1b22;
     --bg-box: #0a171d;
@@ -47,7 +45,6 @@
       radial-gradient(circle at 15% 80%, rgba(237, 149, 48, 0.08) 0%, transparent 50%);
   }
 
-  /* ===== ESTRELLAS ===== */
   .stars-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 
   .star {
@@ -62,7 +59,6 @@
     100% { transform: scale(1.6); opacity: 0.95; }
   }
 
-  /* ===== FONDO SUPERIOR ===== */
   .header-bg-hero {
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -92,7 +88,6 @@
       linear-gradient(180deg, transparent 40%, rgba(20, 40, 49, 0.7) 72%, var(--bg) 100%);
   }
 
-  /* ===== NAVEGACIÓN ===== */
   nav {
     position: relative;
     z-index: 10;
@@ -138,7 +133,6 @@
 
   .nav-btn-back:hover { background: var(--c-teal); border-color: #ffffff; color: var(--c-cream); }
 
-  /* ===== CONTENIDO ===== */
   main {
     position: relative;
     z-index: 2;
@@ -170,7 +164,6 @@
     text-shadow: 3px 3px 0 #000000;
   }
 
-  /* ===== TARJETA ===== */
   .reg-box {
     background: var(--bg-box);
     border: 3px solid var(--border-box);
@@ -183,7 +176,6 @@
     align-items: center;
   }
 
-  /* Avatar */
   .avatar-display-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 28px; }
 
   .avatar-frame {
@@ -211,7 +203,6 @@
     min-height: 14px;
   }
 
-  /* Campos */
   .form-group { width: 100%; display: flex; flex-direction: column; gap: 12px; }
 
   .input-label {
@@ -250,7 +241,6 @@
     margin: 28px 0;
   }
 
-  /* Avisos */
   .notice {
     width: 100%;
     padding: 16px 18px;
@@ -264,7 +254,6 @@
 
   .notice.terms-notice { border-left-color: var(--c-cream); color: var(--text-muted); font-size: 0.9rem; }
 
-  /* Premium Sí / No */
   .premium-options { display: flex; gap: 12px; }
 
   .premium-options input { display: none; }
@@ -292,7 +281,6 @@
     color: var(--c-cream);
   }
 
-  /* Casilla y enlace de términos */
   .terms-check-row {
     width: 100%;
     margin-top: 22px;
@@ -358,7 +346,6 @@
 
   .terms-link:hover { color: #ffffff; }
 
-  /* Estado de invitación */
   .status-section { width: 100%; margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
 
   .status-btn {
@@ -408,7 +395,6 @@
     min-height: 20px;
   }
 
-  /* Enlace de invitación a Discord (solo usuarios aceptados) */
   .discord-link {
     display: none;
     width: 100%;
@@ -428,7 +414,6 @@
   .discord-link.show { display: block; }
   .discord-link:hover { background: var(--c-teal); color: var(--c-cream); transform: translateY(-2px); }
 
-  /* Leyenda de estados */
   .status-legend {
     display: flex;
     justify-content: center;
@@ -441,7 +426,6 @@
   .status-legend span { display: inline-flex; align-items: center; gap: 6px; }
   .status-legend i { width: 10px; height: 10px; display: inline-block; }
 
-  /* ===== MODAL TÉRMINOS ===== */
   .modal-overlay {
     position: fixed;
     inset: 0;
@@ -556,7 +540,6 @@
 
   .modal-ok:hover { background: var(--c-teal); }
 
-  /* ===== FOOTER ===== */
   footer {
     position: relative;
     z-index: 10;
@@ -617,7 +600,6 @@
     </div>
 
     <div class="reg-box">
-      <!-- Avatar -->
       <div class="avatar-display-section">
         <div class="avatar-frame">
           <img id="avatar-preview" class="avatar-img" src="https://mc-heads.net/avatar/MHF_Steve/128" alt="Avatar">
@@ -625,7 +607,6 @@
         <div id="avatar-name" class="avatar-name"></div>
       </div>
 
-      <!-- Nickname -->
       <div class="form-group">
         <label for="mc-nickname" class="input-label">
           <span class="dot">✦</span>
@@ -644,7 +625,6 @@
 
       <div class="divider"></div>
 
-      <!-- Formulario de solicitud -->
       <p class="notice">
         Un moderador revisará tu solicitud. Vuelve más tarde e ingresa tu Nickname para ver si fue aceptada. Si lo es, recibirás la invitación al Discord.
       </p>
@@ -689,7 +669,6 @@
         <button type="button" class="terms-link" id="open-terms">TÉRMINOS Y CONDICIONES</button>
       </div>
 
-      <!-- Estado de invitación -->
       <div class="status-section">
         <span class="input-label">
           <span class="dot">✦</span>
@@ -697,7 +676,6 @@
         </span>
         <button type="button" id="status-btn" class="status-btn idle" disabled>INGRESA TU NICKNAME</button>
         <p id="status-text" class="status-text" aria-live="polite"></p>
-        <!-- El enlace real llega desde el servidor solo si el nickname fue aceptado -->
         <a id="discord-link" class="discord-link" href="#" target="_blank" rel="noopener noreferrer">✦ UNIRSE AL DISCORD ✦</a>
         <div class="status-legend">
           <span><i style="background: var(--c-olive);"></i>Disponible</span>
@@ -709,7 +687,6 @@
     </div>
   </main>
 
-  <!-- Modal de Términos y Condiciones -->
   <div class="modal-overlay" id="terms-modal" role="dialog" aria-modal="true" aria-labelledby="terms-title">
     <div class="modal">
       <div class="modal-header">
@@ -853,8 +830,6 @@
   </footer>
 
   <script>
-    /* ===== CONFIGURACIÓN =====
-       Pega aquí la URL de tu implementación de Apps Script (termina en /exec) */
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxtRoCIIQSITLw8y78IwP05AdvhsK_kKb51Ch0suly22m92QCL906-co_vy2CcG1JWI/exec';
 
     const DEFAULT_AVATAR = 'https://mc-heads.net/avatar/MHF_Steve/128';
@@ -873,15 +848,14 @@
     const CONFIGURED = SCRIPT_URL.startsWith('https://script.google.com');
 
     let debounceTimer = null;
-    let requestId = 0;          // descarta respuestas viejas si el usuario sigue escribiendo
+    let requestId = 0;
     let currentState = 'idle';
     let currentInvite = '';
 
-    /* ===== COMUNICACIÓN CON APPS SCRIPT ===== */
     async function consultarEstado(nick) {
       const res = await fetch(SCRIPT_URL + '?consultar=' + encodeURIComponent(nick), { cache: 'no-store' });
       if (!res.ok) throw new Error('http ' + res.status);
-      return res.json(); // { estado: 'No existe' | 'Pendiente' | 'Aceptado' | 'Rechazado', invitacion?: string }
+      return res.json();
     }
 
     function estadoAInterfaz(estado) {
@@ -889,11 +863,10 @@
         case 'Aceptado': return 'invited';
         case 'Pendiente': return 'pending';
         case 'Rechazado': return 'rejected';
-        default: return 'available'; // "No existe"
+        default: return 'available';
       }
     }
 
-    /* ===== INTERFAZ DE ESTADO ===== */
     function setStatus(state, nick) {
       currentState = state;
       const termsChecked = acceptTerms.checked;
@@ -955,7 +928,6 @@
         avatarName.textContent = '';
         return;
       }
-      // Avatar 2D (MC-Heads, con respaldo en Minotar)
       const primary = `https://mc-heads.net/avatar/${encodeURIComponent(nick)}/128`;
       const fallback = `https://minotar.net/helm/${encodeURIComponent(nick)}/128.png`;
       const probe = new Image();
@@ -965,7 +937,6 @@
       avatarName.textContent = nick;
     }
 
-    /* ===== FLUJO PRINCIPAL ===== */
     async function update() {
       const nick = inputNick.value.trim();
       const id = ++requestId;
@@ -989,7 +960,7 @@
       setStatus('checking', nick);
       try {
         const data = await consultarEstado(nick);
-        if (id !== requestId) return; // el usuario cambió el nickname mientras tanto
+        if (id !== requestId) return;
         currentInvite = String(data.invitacion || '');
         setStatus(estadoAInterfaz(data.estado), nick);
       } catch (err) {
@@ -1013,7 +984,6 @@
       setStatus('sending', nick);
 
       try {
-        // no-cors: no se puede leer la respuesta, así que se confirma consultando el estado
         await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: body });
 
         let confirmado = null;
@@ -1042,15 +1012,14 @@
       }
     }
 
-    /* ===== EVENTOS ===== */
     inputNick.addEventListener('input', () => {
       clearTimeout(debounceTimer);
-      requestId++;               // invalida cualquier consulta en curso
+      requestId++;
       currentInvite = '';
 
       const nick = inputNick.value.trim();
       if (!nick || !NICK_REGEX.test(nick)) {
-        update();                // actualiza al instante (sin llamar al servidor)
+        update();
         return;
       }
       setAvatar(nick);
@@ -1076,7 +1045,6 @@
       else if (currentState === 'error') update();
     });
 
-    // Modal de términos
     const modal = document.getElementById('terms-modal');
     const openModal = () => modal.classList.add('open');
     const closeModal = () => modal.classList.remove('open');
