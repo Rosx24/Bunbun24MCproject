@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Nueva paleta de colores */
+    /* Paleta de colores Kouneli */
     --c-red: #CC2132;
     --c-orange: #E6692A;
     --c-amber: #ED9530;
@@ -96,7 +96,6 @@
     background-size: cover;
     background-position: center 25%;
     background-repeat: no-repeat;
-    /* Imagen más visible y nítida, sin tintado oscuro pesado */
     filter: brightness(0.9) contrast(1.04) saturate(1.08);
     mask-image: linear-gradient(to bottom, 
       rgba(0, 0, 0, 1) 0%, 
@@ -116,11 +115,8 @@
     position: absolute;
     inset: 0;
     background: 
-      /* Barra superior suave para que los enlaces de navegación se lean perfecto */
       linear-gradient(180deg, rgba(13, 27, 34, 0.65) 0%, rgba(13, 27, 34, 0) 18%),
-      /* Difuminado suave hacia el fondo inferior sin tapar la parte central */
       linear-gradient(180deg, transparent 40%, rgba(20, 40, 49, 0.6) 72%, var(--bg) 100%),
-      /* Sutil viñeta izquierda solo detrás del texto para garantizar legibilidad */
       radial-gradient(ellipse at 25% 45%, rgba(13, 27, 34, 0.6) 0%, rgba(13, 27, 34, 0.2) 50%, transparent 70%);
   }
 
@@ -131,8 +127,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 28px 6vw;
+    padding: 24px 6vw;
     background: linear-gradient(180deg, rgba(13, 27, 34, 0.75) 0%, rgba(13, 27, 34, 0) 100%);
+    gap: 16px;
+    flex-wrap: wrap;
   }
 
   .nav-logo {
@@ -172,8 +170,9 @@
 
   .nav-links {
     display: flex;
-    gap: 32px;
+    gap: 28px;
     list-style: none;
+    align-items: center;
   }
 
   .nav-links a {
@@ -189,6 +188,12 @@
     color: #ffffff;
   }
 
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
   .nav-badge {
     font-family: var(--font-pixel);
     font-size: 0.62rem;
@@ -197,6 +202,46 @@
     border: 1px solid var(--c-teal);
     background: rgba(30, 64, 79, 0.75);
     letter-spacing: 1px;
+  }
+
+  /* Botón de Registro en la barra superior */
+  .nav-btn-reg {
+    font-family: var(--font-pixel);
+    font-size: 0.65rem;
+    color: #ffffff;
+    padding: 9px 18px;
+    border: 2px solid var(--c-cream);
+    background: var(--c-midnight);
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 0 #0a171d;
+    transition: all 0.15s ease-in-out;
+  }
+
+  .nav-btn-reg .star-reg {
+    color: var(--c-cream);
+    font-size: 0.75rem;
+    transition: transform 0.2s;
+  }
+
+  .nav-btn-reg:hover {
+    background: var(--c-teal);
+    border-color: #ffffff;
+    color: var(--c-cream);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #0a171d;
+  }
+
+  .nav-btn-reg:hover .star-reg {
+    transform: rotate(45deg);
+  }
+
+  .nav-btn-reg:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #0a171d;
   }
 
   /* ===== HERO CONTENT SECTION ===== */
@@ -234,7 +279,7 @@
   .hero-tag::after {
     content: "✦";
     font-size: 0.85rem;
-    color: var(--c-red);
+    color: var(--c-amber);
   }
 
   h1.hero-title {
@@ -351,6 +396,56 @@
     text-shadow: none;
   }
 
+  /* ===== REGISTER BUTTON IN BODY (BELOW COUNTDOWN) ===== */
+  .register-action-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+  }
+
+  .portal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--font-pixel);
+    font-size: clamp(0.85rem, 2.2vw, 1.05rem);
+    color: #ffffff;
+    background: var(--c-midnight);
+    border: 3px solid var(--c-cream);
+    padding: 20px 46px;
+    text-decoration: none;
+    letter-spacing: 2px;
+    box-shadow: 0 8px 0 #0a171d, 0 16px 32px rgba(0, 0, 0, 0.5);
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    text-shadow: none;
+    user-select: none;
+  }
+
+  .portal-btn .star-icon {
+    color: var(--c-cream);
+    font-size: 1.1rem;
+    transition: transform 0.2s;
+  }
+
+  .portal-btn:hover {
+    background: var(--c-teal);
+    border-color: #ffffff;
+    color: var(--c-cream);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 0 #0a171d, 0 20px 36px rgba(0, 0, 0, 0.6);
+  }
+
+  .portal-btn:hover .star-icon {
+    transform: rotate(45deg);
+  }
+
+  .portal-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 4px 0 #0a171d;
+  }
+
   /* ===== FOOTER ===== */
   footer {
     position: relative;
@@ -408,6 +503,146 @@
     100% { opacity: 1; }
   }
 
+  /* ===== BARRA LATERAL DE MIEMBROS ADMITIDOS ===== */
+  .sidebar-toggle {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 45;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-family: var(--font-pixel);
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    color: #ffffff;
+    background: var(--c-midnight);
+    border: 2px solid var(--c-cream);
+    border-left: none;
+    padding: 16px 10px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 #0a171d;
+    transition: all 0.15s;
+  }
+
+  .sidebar-toggle:hover {
+    background: var(--c-teal);
+    color: var(--c-cream);
+    padding-left: 14px;
+  }
+
+  .members-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 320px;
+    max-width: 88vw;
+    background: var(--bg-box);
+    border-right: 3px solid var(--border-box);
+    z-index: 60;
+    transform: translateX(-102%);
+    transition: transform 0.25s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.6);
+  }
+
+  .members-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 18px;
+    border-bottom: 2px solid rgba(52, 104, 92, 0.6);
+  }
+
+  .sidebar-title {
+    font-family: var(--font-pixel);
+    font-size: 0.72rem;
+    color: var(--c-cream);
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sidebar-title .dot { color: var(--c-red); }
+
+  .sidebar-close {
+    background: none;
+    border: 2px solid var(--c-teal);
+    color: #ffffff;
+    font-family: var(--font-pixel);
+    font-size: 0.65rem;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+
+  .sidebar-close:hover {
+    border-color: var(--c-cream);
+    color: var(--c-cream);
+  }
+
+  .sidebar-list {
+    list-style: none;
+    padding: 16px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sb-member-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #0e2028;
+    border: 2px solid var(--c-teal);
+    padding: 10px 12px;
+  }
+
+  .sb-member-index {
+    font-family: var(--font-pixel);
+    font-size: 0.65rem;
+    color: var(--c-olive);
+    min-width: 28px;
+  }
+
+  .sb-avatar-frame {
+    width: 40px;
+    height: 40px;
+    background: #081318;
+    border: 2px solid var(--c-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .sb-avatar {
+    width: 34px;
+    height: 34px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    display: block;
+  }
+
+  .sb-member-nick {
+    font-family: var(--font-pixel);
+    font-size: 0.68rem;
+    color: #ffffff;
+    letter-spacing: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 980px) {
     .hero-grid {
@@ -451,17 +686,45 @@
     <div class="star" style="top: 55%; left: 35%; background: var(--c-red); animation-delay: 1.1s;"></div>
   </div>
 
+  <!-- Botón y Barra Lateral de Miembros Admitidos -->
+  <button type="button" class="sidebar-toggle" id="open-sidebar" aria-label="Abrir lista de admitidos">
+    ✦ ADMITIDOS
+  </button>
+
+  <aside class="members-sidebar" id="members-sidebar" aria-label="Miembros admitidos">
+    <div class="sidebar-header">
+      <span class="sidebar-title">
+        <span class="dot">✦</span>
+        <span>ADMITIDOS</span>
+      </span>
+      <button type="button" class="sidebar-close" id="close-sidebar" aria-label="Cerrar">✕</button>
+    </div>
+    <ol class="sidebar-list" id="sidebar-members-list"></ol>
+  </aside>
+
   <!-- Navigation Bar -->
   <nav>
-    <a href="#" class="nav-logo">
+    <a href="index.html" class="nav-logo">
       <span class="pixel-heart"></span>
       <span>KOUNELI</span>
     </a>
     <ul class="nav-links">
       <li><a href="#inicio">INICIO</a></li>
       <li><a href="#apertura">APERTURA</a></li>
+      <li><a href="miembros.html">MIEMBROS</a></li>
+      <li><a href="registro.html">REGISTRO</a></li>
     </ul>
-    <div class="nav-badge">20 · 11 · 2026</div>
+    <div class="nav-actions">
+      <div class="nav-badge">20 · 11 · 2026</div>
+      <a href="miembros.html" class="nav-btn-reg">
+        <span>MIEMBROS</span>
+        <span class="star-reg">✦</span>
+      </a>
+      <a href="registro.html" class="nav-btn-reg">
+        <span>REGISTRO</span>
+        <span class="star-reg">✦</span>
+      </a>
+    </div>
   </nav>
 
   <!-- Hero Content -->
@@ -511,10 +774,19 @@
           <div class="quote-icon">✦</div>
           <div class="quote-body">
             <p>"Seguimos esperando por la conexión."</p>
-            <p class="quote-author">- Kouneli · 20 de Noviembre</p>
+            <p class="quote-author">- Kouneli · 22 de Noviembre</p>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Botón de redirección a registro.html en el cuerpo (justo abajo del contador) -->
+    <div class="register-action-wrapper">
+      <a href="registro.html" class="portal-btn">
+        <span class="star-icon">✦</span>
+        <span>REGISTRARSE</span>
+        <span class="star-icon">✦</span>
+      </a>
     </div>
   </main>
 
@@ -535,7 +807,7 @@
     </div>
   </footer>
 
-  <!-- Countdown Logic -->
+  <!-- Countdown & Sidebar Logic -->
   <script>
     // Countdown Target: 20 de Noviembre
     let year = new Date().getFullYear();
@@ -565,7 +837,71 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    // Barra lateral de miembros admitidos
+    const sidebar = document.getElementById('members-sidebar');
+    const openSidebarBtn = document.getElementById('open-sidebar');
+    const closeSidebarBtn = document.getElementById('close-sidebar');
+    const sidebarList = document.getElementById('sidebar-members-list');
+
+    function loadAdmittedMembers() {
+      const list = ['Rosx24'];
+      const seen = new Set(list.map(n => n.toLowerCase()));
+
+      const storedMembers = JSON.parse(localStorage.getItem('kouneli_members') || '[]');
+      storedMembers.forEach(entry => {
+        const nick = typeof entry === 'string' ? entry : entry.nick;
+        if (nick && !seen.has(nick.toLowerCase())) {
+          seen.add(nick.toLowerCase());
+          list.push(nick);
+        }
+      });
+
+      const storedPending = JSON.parse(localStorage.getItem('kouneli_pending') || '[]');
+      storedPending.forEach(nick => {
+        if (nick && !seen.has(nick.toLowerCase())) {
+          seen.add(nick.toLowerCase());
+          list.push(nick);
+        }
+      });
+
+      return list;
+    }
+
+    function renderSidebarMembers() {
+      const members = loadAdmittedMembers();
+      sidebarList.innerHTML = '';
+
+      members.forEach((nick, index) => {
+        const li = document.createElement('li');
+        li.className = 'sb-member-item';
+        const num = String(index + 1).padStart(2, '0');
+        const primaryAvatar = `https://mc-heads.net/avatar/${encodeURIComponent(nick)}/64`;
+        const fallbackAvatar = `https://minotar.net/helm/${encodeURIComponent(nick)}/64.png`;
+
+        li.innerHTML = `
+          <span class="sb-member-index">#${num}</span>
+          <div class="sb-avatar-frame">
+            <img class="sb-avatar" src="${primaryAvatar}" alt="${nick}" onerror="this.onerror=null;this.src='${fallbackAvatar}';">
+          </div>
+          <span class="sb-member-nick"></span>
+        `;
+        li.querySelector('.sb-member-nick').textContent = nick;
+        sidebarList.appendChild(li);
+      });
+    }
+
+    openSidebarBtn.addEventListener('click', () => {
+      renderSidebarMembers();
+      sidebar.classList.add('open');
+    });
+
+    closeSidebarBtn.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+    });
+
+    renderSidebarMembers();
+    window.addEventListener('storage', renderSidebarMembers);
   </script>
 </body>
 </html>
-

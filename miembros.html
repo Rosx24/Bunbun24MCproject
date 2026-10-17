@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KOUNELI | Miembros Admitidos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Paleta de colores Kouneli */
+    --c-red: #CC2132;
+    --c-orange: #E6692A;
+    --c-amber: #ED9530;
+    --c-cream: #E9BD96;
+    --c-olive: #988A20;
+    --c-teal: #34685C;
+    --c-midnight: #1E404F;
+
+    /* Base oscura */
+    --bg: #142831;
+    --bg-dark: #0d1b22;
+    --bg-box: #0a171d;
+    --border-box: #E9BD96;
+
+    --text-white: #ffffff;
+    --text-muted: #9bb7c2;
+    --font-pixel: 'Press Start 2P', monospace;
+    --font-ui: 'Outfit', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text-white);
+    font-family: var(--font-ui);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-x: hidden;
+    position: relative;
+    background-image:
+      radial-gradient(ellipse at 75% 35%, rgba(52, 104, 92, 0.3) 0%, transparent 60%),
+      radial-gradient(circle at 15% 80%, rgba(237, 149, 48, 0.08) 0%, transparent 50%);
+  }
+
+  /* ===== ESTRELLAS ===== */
+  .stars-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+
+  .star {
+    position: absolute;
+    width: 7px; height: 7px;
+    clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
+    animation: twinkle 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes twinkle {
+    0% { transform: scale(0.6); opacity: 0.25; }
+    100% { transform: scale(1.6); opacity: 0.95; }
+  }
+
+  /* ===== FONDO SUPERIOR ===== */
+  .header-bg-hero {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 520px;
+    max-height: 65vh;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .header-bg-img {
+    position: absolute;
+    inset: 0;
+    background-image: url('bg-minecraft.jpg');
+    background-size: cover;
+    background-position: center 25%;
+    filter: brightness(0.9) contrast(1.04) saturate(1.08);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgba(0,0,0,0.6) 75%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgba(0,0,0,0.6) 75%, transparent 100%);
+  }
+
+  .header-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(13, 27, 34, 0.65) 0%, rgba(13, 27, 34, 0) 18%),
+      linear-gradient(180deg, transparent 40%, rgba(20, 40, 49, 0.7) 72%, var(--bg) 100%);
+  }
+
+  /* ===== NAVEGACIÓN ===== */
+  nav {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 6vw;
+    background: linear-gradient(180deg, rgba(13, 27, 34, 0.75) 0%, rgba(13, 27, 34, 0) 100%);
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+
+  .nav-logo .pixel-heart {
+    width: 14px; height: 14px;
+    background: var(--c-red);
+    clip-path: polygon(50% 100%, 0% 45%, 0% 15%, 25% 0%, 50% 25%, 75% 0%, 100% 15%, 100% 45%);
+    animation: heartpulse 1.8s infinite;
+  }
+
+  @keyframes heartpulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.22); }
+  }
+
+  .nav-logo span {
+    font-family: var(--font-pixel);
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    color: #ffffff;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-btn-back {
+    font-family: var(--font-pixel);
+    font-size: 0.62rem;
+    color: #ffffff;
+    padding: 9px 16px;
+    border: 1px solid var(--c-teal);
+    background: rgba(30, 64, 79, 0.75);
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .nav-btn-back:hover { background: var(--c-teal); border-color: #ffffff; color: var(--c-cream); }
+
+  /* ===== CONTENIDO PRINCIPAL ===== */
+  main {
+    position: relative;
+    z-index: 2;
+    padding: 20px 6vw 50px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .members-header { text-align: center; margin-bottom: 30px; }
+
+  .hero-tag {
+    font-family: var(--font-pixel);
+    font-size: 0.72rem;
+    color: var(--c-red);
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  h1.members-title {
+    font-family: var(--font-pixel);
+    font-size: clamp(1.6rem, 4.2vw, 2.5rem);
+    line-height: 1.3;
+    letter-spacing: 2px;
+    color: #ffffff;
+    text-shadow: 3px 3px 0 #000000;
+  }
+
+  /* ===== RECUADRO DE LISTA ===== */
+  .members-box {
+    background: var(--bg-box);
+    border: 3px solid var(--border-box);
+    padding: 30px 28px;
+    width: 100%;
+    max-width: 680px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .members-box-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+    border-bottom: 2px dashed rgba(52, 104, 92, 0.6);
+  }
+
+  .members-box-label {
+    font-family: var(--font-pixel);
+    font-size: 0.68rem;
+    color: var(--c-cream);
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .members-box-label .dot { color: var(--c-red); }
+
+  .members-count {
+    font-family: var(--font-pixel);
+    font-size: 0.65rem;
+    color: var(--c-olive);
+    letter-spacing: 1px;
+  }
+
+  /* Lista ordenada */
+  ol.members-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .member-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #0e2028;
+    border: 2px solid var(--c-teal);
+    padding: 12px 16px;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+
+  .member-item:hover {
+    border-color: var(--c-cream);
+    transform: translateX(4px);
+  }
+
+  .member-index {
+    font-family: var(--font-pixel);
+    font-size: 0.78rem;
+    color: var(--c-olive);
+    min-width: 38px;
+    letter-spacing: 1px;
+  }
+
+  .member-avatar-frame {
+    width: 52px;
+    height: 52px;
+    background: #081318;
+    border: 2px solid var(--c-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .member-avatar {
+    width: 44px;
+    height: 44px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    display: block;
+  }
+
+  .member-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .member-nick {
+    font-family: var(--font-pixel);
+    font-size: 0.82rem;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .member-badge {
+    font-family: var(--font-pixel);
+    font-size: 0.55rem;
+    color: var(--c-cream);
+    background: var(--c-midnight);
+    border: 1px solid var(--c-teal);
+    padding: 6px 10px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    position: relative;
+    z-index: 10;
+    padding: 24px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+    background: var(--bg-dark);
+    border-top: 1px solid rgba(52, 104, 92, 0.35);
+  }
+
+  .footer-left, .footer-music { font-family: var(--font-pixel); font-size: 0.58rem; }
+  .footer-center { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; letter-spacing: 1px; }
+  .footer-center .f-heart { color: var(--c-red); }
+  .sound-waves { color: var(--c-cream); letter-spacing: 2px; animation: wavePulse 1s steps(2) infinite alternate; }
+
+  @keyframes wavePulse { 0% { opacity: 0.4; } 100% { opacity: 1; } }
+
+  @media (max-width: 650px) {
+    .members-box { padding: 22px 16px; }
+    .member-badge { display: none; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="header-bg-hero">
+    <div class="header-bg-img"></div>
+    <div class="header-bg-gradient"></div>
+  </div>
+
+  <div class="stars-bg">
+    <div class="star" style="top: 15%; left: 10%; background: var(--c-amber); animation-delay: 0s;"></div>
+    <div class="star" style="top: 25%; left: 45%; background: var(--c-cream); animation-delay: 1.4s;"></div>
+    <div class="star" style="top: 12%; left: 85%; background: var(--c-orange); animation-delay: 0.7s;"></div>
+    <div class="star" style="top: 45%; left: 75%; background: var(--c-olive); animation-delay: 2.1s;"></div>
+    <div class="star" style="top: 70%; left: 20%; background: var(--c-cream); animation-delay: 1.8s;"></div>
+    <div class="star" style="top: 80%; left: 88%; background: var(--c-amber); animation-delay: 0.3s;"></div>
+    <div class="star" style="top: 55%; left: 35%; background: var(--c-red); animation-delay: 1.1s;"></div>
+  </div>
+
+  <nav>
+    <a href="kouneli.html" class="nav-logo">
+      <span class="pixel-heart"></span>
+      <span>KOUNELI</span>
+    </a>
+    <div class="nav-actions">
+      <a href="registro.html" class="nav-btn-back">REGISTRO ✦</a>
+      <a href="kouneli.html" class="nav-btn-back">← VOLVER</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="members-header">
+      <div class="hero-tag">✦ COMUNIDAD ✦</div>
+      <h1 class="members-title">ADMITIDOS</h1>
+    </div>
+
+    <div class="members-box">
+      <div class="members-box-top">
+        <span class="members-box-label">
+          <span class="dot">✦</span>
+          <span>LISTA DE JUGADORES</span>
+        </span>
+        <span class="members-count" id="members-count">TOTAL: 0</span>
+      </div>
+
+      <ol class="members-list" id="members-list"></ol>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-left">MINECRAFT SERVER</div>
+    <div class="footer-center">
+      <span class="f-heart">✦</span>
+      <span>2026 KOUNELI</span>
+    </div>
+    <div class="footer-music">♫ THEME <span class="sound-waves">ıılılı</span></div>
+  </footer>
+
+  <script>
+    const BASE_ADMITTED = ['Rosx24'];
+
+    function loadAdmittedMembers() {
+      const list = [...BASE_ADMITTED];
+      const seen = new Set(list.map(n => n.toLowerCase()));
+
+      // Leer miembros registrados con su formato original
+      const storedMembers = JSON.parse(localStorage.getItem('kouneli_members') || '[]');
+      storedMembers.forEach(entry => {
+        const nick = typeof entry === 'string' ? entry : entry.nick;
+        if (nick && !seen.has(nick.toLowerCase())) {
+          seen.add(nick.toLowerCase());
+          list.push(nick);
+        }
+      });
+
+      // Respaldo: incluir también registros previos en kouneli_pending
+      const storedPending = JSON.parse(localStorage.getItem('kouneli_pending') || '[]');
+      storedPending.forEach(nick => {
+        if (nick && !seen.has(nick.toLowerCase())) {
+          seen.add(nick.toLowerCase());
+          list.push(nick);
+        }
+      });
+
+      return list;
+    }
+
+    function renderMembers() {
+      const members = loadAdmittedMembers();
+      const ol = document.getElementById('members-list');
+      const countEl = document.getElementById('members-count');
+
+      countEl.textContent = `TOTAL: ${members.length}`;
+      ol.innerHTML = '';
+
+      members.forEach((nick, index) => {
+        const li = document.createElement('li');
+        li.className = 'member-item';
+
+        const num = String(index + 1).padStart(2, '0');
+        const primaryAvatar = `https://mc-heads.net/avatar/${encodeURIComponent(nick)}/64`;
+        const fallbackAvatar = `https://minotar.net/helm/${encodeURIComponent(nick)}/64.png`;
+
+        li.innerHTML = `
+          <span class="member-index">#${num}</span>
+          <div class="member-avatar-frame">
+            <img class="member-avatar" src="${primaryAvatar}" alt="${nick}" onerror="this.onerror=null;this.src='${fallbackAvatar}';">
+          </div>
+          <div class="member-info">
+            <span class="member-nick"></span>
+          </div>
+          <span class="member-badge">ADMITIDO</span>
+        `;
+
+        li.querySelector('.member-nick').textContent = nick;
+        ol.appendChild(li);
+      });
+    }
+
+    renderMembers();
+    window.addEventListener('storage', renderMembers);
+  </script>
+</body>
+</html>
+

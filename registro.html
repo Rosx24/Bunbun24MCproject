@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KOUNELI | Registro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Paleta de colores Kouneli */
+    --c-red: #CC2132;
+    --c-orange: #E6692A;
+    --c-amber: #ED9530;
+    --c-cream: #E9BD96;
+    --c-olive: #988A20;
+    --c-teal: #34685C;
+    --c-midnight: #1E404F;
+
+    /* Base oscura */
+    --bg: #142831;
+    --bg-dark: #0d1b22;
+    --bg-box: #0a171d;
+    --border-box: #E9BD96;
+
+    --text-white: #ffffff;
+    --text-muted: #9bb7c2;
+    --font-pixel: 'Press Start 2P', monospace;
+    --font-ui: 'Outfit', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text-white);
+    font-family: var(--font-ui);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-x: hidden;
+    position: relative;
+    background-image:
+      radial-gradient(ellipse at 75% 35%, rgba(52, 104, 92, 0.3) 0%, transparent 60%),
+      radial-gradient(circle at 15% 80%, rgba(237, 149, 48, 0.08) 0%, transparent 50%);
+  }
+
+  /* ===== ESTRELLAS ===== */
+  .stars-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+
+  .star {
+    position: absolute;
+    width: 7px; height: 7px;
+    clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
+    animation: twinkle 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes twinkle {
+    0% { transform: scale(0.6); opacity: 0.25; }
+    100% { transform: scale(1.6); opacity: 0.95; }
+  }
+
+  /* ===== FONDO SUPERIOR ===== */
+  .header-bg-hero {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 520px;
+    max-height: 65vh;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .header-bg-img {
+    position: absolute;
+    inset: 0;
+    background-image: url('bg-minecraft.jpg');
+    background-size: cover;
+    background-position: center 25%;
+    filter: brightness(0.9) contrast(1.04) saturate(1.08);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgba(0,0,0,0.6) 75%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgba(0,0,0,0.6) 75%, transparent 100%);
+  }
+
+  .header-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(13, 27, 34, 0.65) 0%, rgba(13, 27, 34, 0) 18%),
+      linear-gradient(180deg, transparent 40%, rgba(20, 40, 49, 0.7) 72%, var(--bg) 100%);
+  }
+
+  /* ===== NAVEGACIÓN ===== */
+  nav {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 6vw;
+    background: linear-gradient(180deg, rgba(13, 27, 34, 0.75) 0%, rgba(13, 27, 34, 0) 100%);
+  }
+
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+
+  .nav-logo .pixel-heart {
+    width: 14px; height: 14px;
+    background: var(--c-red);
+    clip-path: polygon(50% 100%, 0% 45%, 0% 15%, 25% 0%, 50% 25%, 75% 0%, 100% 15%, 100% 45%);
+    animation: heartpulse 1.8s infinite;
+  }
+
+  @keyframes heartpulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.22); }
+  }
+
+  .nav-logo span {
+    font-family: var(--font-pixel);
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    color: #ffffff;
+  }
+
+  .nav-btn-back {
+    font-family: var(--font-pixel);
+    font-size: 0.62rem;
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid var(--c-teal);
+    background: rgba(30, 64, 79, 0.75);
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .nav-btn-back:hover { background: var(--c-teal); border-color: #ffffff; color: var(--c-cream); }
+
+  /* ===== CONTENIDO ===== */
+  main {
+    position: relative;
+    z-index: 2;
+    padding: 20px 6vw 50px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .reg-hero-header { text-align: center; margin-bottom: 30px; }
+
+  .hero-tag {
+    font-family: var(--font-pixel);
+    font-size: 0.72rem;
+    color: var(--c-red);
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  h1.reg-title {
+    font-family: var(--font-pixel);
+    font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+    line-height: 1.3;
+    letter-spacing: 2px;
+    color: #ffffff;
+    text-shadow: 3px 3px 0 #000000;
+  }
+
+  /* ===== TARJETA ===== */
+  .reg-box {
+    background: var(--bg-box);
+    border: 3px solid var(--border-box);
+    padding: 36px 32px;
+    width: 100%;
+    max-width: 650px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Avatar */
+  .avatar-display-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 28px; }
+
+  .avatar-frame {
+    width: 116px; height: 116px;
+    background: #0e2028;
+    border: 3px solid var(--c-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.7);
+  }
+
+  .avatar-img {
+    width: 96px; height: 96px;
+    image-rendering: pixelated;
+    display: block;
+  }
+
+  .avatar-name {
+    margin-top: 12px;
+    font-family: var(--font-pixel);
+    font-size: 0.65rem;
+    color: var(--c-olive);
+    letter-spacing: 1px;
+    min-height: 14px;
+  }
+
+  /* Campos */
+  .form-group { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+
+  .input-label {
+    font-family: var(--font-pixel);
+    font-size: 0.68rem;
+    color: var(--c-cream);
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .input-label .dot { color: var(--c-red); }
+  .input-label .optional { color: var(--text-muted); font-size: 0.55rem; }
+
+  .nickname-input {
+    width: 100%;
+    background: #0e2028;
+    border: 2px solid var(--c-teal);
+    color: #ffffff;
+    font-family: var(--font-pixel);
+    font-size: 0.85rem;
+    padding: 16px 18px;
+    letter-spacing: 1.5px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .nickname-input::placeholder { color: rgba(155, 183, 194, 0.5); font-family: var(--font-ui); font-size: 0.95rem; letter-spacing: normal; }
+  .nickname-input:focus { border-color: var(--c-cream); }
+
+  .divider {
+    width: 100%;
+    height: 0;
+    border-top: 2px dashed rgba(52, 104, 92, 0.6);
+    margin: 28px 0;
+  }
+
+  /* Avisos */
+  .notice {
+    width: 100%;
+    padding: 16px 18px;
+    background: rgba(30, 64, 79, 0.45);
+    border-left: 3px solid var(--c-amber);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: #ffffff;
+    margin-bottom: 14px;
+  }
+
+  .notice.terms-notice { border-left-color: var(--c-cream); color: var(--text-muted); font-size: 0.9rem; }
+
+  /* Premium Sí / No */
+  .premium-options { display: flex; gap: 12px; }
+
+  .premium-options input { display: none; }
+
+  .premium-options label {
+    flex: 1;
+    text-align: center;
+    font-family: var(--font-pixel);
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    padding: 14px 10px;
+    background: #0e2028;
+    border: 2px solid var(--c-teal);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+
+  .premium-options label:hover { border-color: var(--c-cream); color: #ffffff; }
+
+  .premium-options input:checked + label {
+    background: var(--c-midnight);
+    border-color: var(--c-cream);
+    color: var(--c-cream);
+  }
+
+  /* Casilla y enlace de términos */
+  .terms-check-row {
+    width: 100%;
+    margin-top: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .terms-check-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.92rem;
+    color: var(--text-white);
+  }
+
+  .terms-checkbox {
+    display: none;
+  }
+
+  .custom-checkbox {
+    width: 22px;
+    height: 22px;
+    background: #0e2028;
+    border: 2px solid var(--c-teal);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-pixel);
+    font-size: 0.65rem;
+    color: var(--c-cream);
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+
+  .terms-check-label:hover .custom-checkbox {
+    border-color: var(--c-cream);
+  }
+
+  .terms-checkbox:checked + .custom-checkbox {
+    background: var(--c-midnight);
+    border-color: var(--c-cream);
+  }
+
+  .terms-checkbox:checked + .custom-checkbox::after {
+    content: "✓";
+  }
+
+  .terms-link {
+    background: none;
+    border: none;
+    font-family: var(--font-pixel);
+    font-size: 0.62rem;
+    letter-spacing: 1px;
+    color: var(--c-cream);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+  }
+
+  .terms-link:hover { color: #ffffff; }
+
+  /* Estado de invitación */
+  .status-section { width: 100%; margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+
+  .status-btn {
+    width: 100%;
+    font-family: var(--font-pixel);
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
+    letter-spacing: 2px;
+    color: #ffffff;
+    padding: 20px;
+    border: 3px solid transparent;
+    box-shadow: 0 6px 0 #0a171d;
+    transition: all 0.15s;
+    cursor: default;
+  }
+
+  .status-btn.idle { background: #0e2028; border-color: var(--c-teal); color: var(--text-muted); }
+
+  .status-btn.checking,
+  .status-btn.sending { background: #0e2028; border-color: var(--c-teal); color: var(--text-muted); animation: statusPulse 1s ease-in-out infinite alternate; }
+
+  @keyframes statusPulse { 0% { opacity: 0.55; } 100% { opacity: 1; } }
+
+  .status-btn.available { background: var(--c-olive); border-color: #b9a92c; cursor: pointer; }
+  .status-btn.available:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 0 #0a171d; }
+  .status-btn.available:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 2px 0 #0a171d; }
+
+  .status-btn.available.terms-locked {
+    background: #3b4449;
+    border-color: #5b676e;
+    color: #9aa6ad;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 6px 0 #0a171d;
+  }
+
+  .status-btn.pending { background: var(--c-orange); border-color: var(--c-amber); }
+  .status-btn.invited { background: var(--c-red); border-color: #e04454; }
+  .status-btn.rejected { background: #4a1219; border-color: var(--c-red); color: var(--text-muted); }
+
+  .status-btn.error { background: #0e2028; border-color: var(--c-orange); cursor: pointer; }
+  .status-btn.error:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #0a171d; }
+
+  .status-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-align: center;
+    min-height: 20px;
+  }
+
+  /* Enlace de invitación a Discord (solo usuarios aceptados) */
+  .discord-link {
+    display: none;
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-pixel);
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+    background: var(--c-midnight);
+    border: 3px solid var(--c-cream);
+    padding: 16px;
+    text-decoration: none;
+    box-shadow: 0 6px 0 #0a171d;
+    transition: all 0.15s;
+  }
+
+  .discord-link.show { display: block; }
+  .discord-link:hover { background: var(--c-teal); color: var(--c-cream); transform: translateY(-2px); }
+
+  /* Leyenda de estados */
+  .status-legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .status-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .status-legend i { width: 10px; height: 10px; display: inline-block; }
+
+  /* ===== MODAL TÉRMINOS ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 12, 16, 0.82);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--bg-box);
+    border: 3px solid var(--border-box);
+    width: 100%;
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 22px;
+    border-bottom: 2px solid rgba(52, 104, 92, 0.6);
+  }
+
+  .modal-header h2 {
+    font-family: var(--font-pixel);
+    font-size: 0.8rem;
+    color: var(--c-cream);
+    letter-spacing: 1.5px;
+  }
+
+  .modal-close {
+    background: none;
+    border: 2px solid var(--c-teal);
+    color: #ffffff;
+    font-family: var(--font-pixel);
+    font-size: 0.7rem;
+    width: 34px; height: 34px;
+    cursor: pointer;
+  }
+
+  .modal-close:hover { border-color: var(--c-cream); color: var(--c-cream); }
+
+  .modal-body {
+    padding: 22px;
+    overflow-y: auto;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #d6e2e7;
+  }
+
+  .modal-body h3 {
+    font-family: var(--font-pixel);
+    font-size: 0.62rem;
+    color: var(--c-red);
+    letter-spacing: 1px;
+    margin: 18px 0 8px;
+  }
+
+  .modal-body h3:first-child { margin-top: 0; }
+
+  .modal-footer { padding: 16px 22px; border-top: 2px solid rgba(52, 104, 92, 0.6); text-align: right; }
+
+  .modal-ok {
+    font-family: var(--font-pixel);
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    color: #ffffff;
+    background: var(--c-midnight);
+    border: 2px solid var(--c-cream);
+    padding: 12px 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #0a171d;
+  }
+
+  .modal-ok:hover { background: var(--c-teal); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    position: relative;
+    z-index: 10;
+    padding: 24px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+    background: var(--bg-dark);
+    border-top: 1px solid rgba(52, 104, 92, 0.35);
+  }
+
+  .footer-left, .footer-music { font-family: var(--font-pixel); font-size: 0.58rem; }
+  .footer-center { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; letter-spacing: 1px; }
+  .footer-center .f-heart { color: var(--c-red); }
+  .sound-waves { color: var(--c-cream); letter-spacing: 2px; animation: wavePulse 1s steps(2) infinite alternate; }
+
+  @keyframes wavePulse { 0% { opacity: 0.4; } 100% { opacity: 1; } }
+
+  @media (max-width: 650px) {
+    .reg-box { padding: 24px 18px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="header-bg-hero">
+    <div class="header-bg-img"></div>
+    <div class="header-bg-gradient"></div>
+  </div>
+
+  <div class="stars-bg">
+    <div class="star" style="top: 15%; left: 10%; background: var(--c-amber); animation-delay: 0s;"></div>
+    <div class="star" style="top: 25%; left: 45%; background: var(--c-cream); animation-delay: 1.4s;"></div>
+    <div class="star" style="top: 12%; left: 85%; background: var(--c-orange); animation-delay: 0.7s;"></div>
+    <div class="star" style="top: 45%; left: 75%; background: var(--c-olive); animation-delay: 2.1s;"></div>
+    <div class="star" style="top: 70%; left: 20%; background: var(--c-cream); animation-delay: 1.8s;"></div>
+    <div class="star" style="top: 80%; left: 88%; background: var(--c-amber); animation-delay: 0.3s;"></div>
+    <div class="star" style="top: 55%; left: 35%; background: var(--c-red); animation-delay: 1.1s;"></div>
+  </div>
+
+  <nav>
+    <a href="kouneli.html" class="nav-logo">
+      <span class="pixel-heart"></span>
+      <span>KOUNELI</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <a href="miembros.html" class="nav-btn-back">MIEMBROS ✦</a>
+      <a href="kouneli.html" class="nav-btn-back">← VOLVER</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="reg-hero-header">
+      <div class="hero-tag">✦ REGISTRO ✦</div>
+      <h1 class="reg-title">SOLICITUD</h1>
+    </div>
+
+    <div class="reg-box">
+      <!-- Avatar -->
+      <div class="avatar-display-section">
+        <div class="avatar-frame">
+          <img id="avatar-preview" class="avatar-img" src="https://mc-heads.net/avatar/MHF_Steve/128" alt="Avatar">
+        </div>
+        <div id="avatar-name" class="avatar-name"></div>
+      </div>
+
+      <!-- Nickname -->
+      <div class="form-group">
+        <label for="mc-nickname" class="input-label">
+          <span class="dot">✦</span>
+          <span>NICKNAME DE MINECRAFT</span>
+        </label>
+        <input
+          type="text"
+          id="mc-nickname"
+          class="nickname-input"
+          placeholder="Tu nombre en el juego"
+          maxlength="16"
+          autocomplete="off"
+          spellcheck="false"
+        >
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Formulario de solicitud -->
+      <p class="notice">
+        Un moderador revisará tu solicitud. Vuelve más tarde e ingresa tu Nickname para ver si fue aceptada. Si lo es, recibirás la invitación al Discord.
+      </p>
+
+      <div class="form-group" style="margin-top: 14px;">
+        <label for="discord-name" class="input-label">
+          <span class="dot">✦</span>
+          <span>NOMBRE EN DISCORD</span>
+          <span class="optional">(OPCIONAL)</span>
+        </label>
+        <input
+          type="text"
+          id="discord-name"
+          class="nickname-input"
+          placeholder="Tu usuario de Discord"
+          maxlength="32"
+          autocomplete="off"
+          spellcheck="false"
+        >
+      </div>
+
+      <div class="form-group" style="margin-top: 22px;">
+        <span class="input-label">
+          <span class="dot">✦</span>
+          <span>¿ERES PREMIUM?</span>
+          <span class="optional">(OPCIONAL)</span>
+        </span>
+        <div class="premium-options">
+          <input type="radio" name="premium" id="premium-si" value="si">
+          <label for="premium-si">SÍ</label>
+          <input type="radio" name="premium" id="premium-no" value="no">
+          <label for="premium-no">NO</label>
+        </div>
+      </div>
+
+      <div class="terms-check-row">
+        <label class="terms-check-label" for="accept-terms">
+          <input type="checkbox" id="accept-terms" class="terms-checkbox">
+          <span class="custom-checkbox"></span>
+          <span>Acepto los</span>
+        </label>
+        <button type="button" class="terms-link" id="open-terms">TÉRMINOS Y CONDICIONES</button>
+      </div>
+
+      <!-- Estado de invitación -->
+      <div class="status-section">
+        <span class="input-label">
+          <span class="dot">✦</span>
+          <span>ESTADO DE INVITACIÓN</span>
+        </span>
+        <button type="button" id="status-btn" class="status-btn idle" disabled>INGRESA TU NICKNAME</button>
+        <p id="status-text" class="status-text" aria-live="polite"></p>
+        <!-- El enlace real llega desde el servidor solo si el nickname fue aceptado -->
+        <a id="discord-link" class="discord-link" href="#" target="_blank" rel="noopener noreferrer">✦ UNIRSE AL DISCORD ✦</a>
+        <div class="status-legend">
+          <span><i style="background: var(--c-olive);"></i>Disponible</span>
+          <span><i style="background: var(--c-orange);"></i>Pendiente</span>
+          <span><i style="background: var(--c-red);"></i>Aceptado</span>
+          <span><i style="background: #4a1219;"></i>Rechazado</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal de Términos y Condiciones -->
+  <div class="modal-overlay" id="terms-modal" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="terms-title">TÉRMINOS Y CONDICIONES</h2>
+        <button type="button" class="modal-close" id="close-terms" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="modal-body">
+        <h3>1. ACEPTACIÓN</h3>
+        <p>Texto de prueba. Al enviar una solicitud de entrada a Kouneli aceptas estas condiciones de uso.</p>
+        <h3>2. CONDUCTA</h3>
+        <p>Texto de prueba. Se espera respeto hacia todos los jugadores y moderadores. No se permite el uso de hacks, exploits ni lenguaje ofensivo.</p>
+        <h3>3. CONSTRUCCIONES</h3>
+        <p>Texto de prueba. El grifeo y robo de construcciones ajenas está prohibido.</p>
+        <h3>4. SANCIONES</h3>
+        <p>Texto de prueba. El incumplimiento de las normas puede resultar en la expulsión temporal o permanente del servidor.</p>
+        <h3>5. CAMBIOS</h3>
+        <p>Texto de prueba. Estos términos pueden actualizarse en cualquier momento.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="modal-ok" id="ok-terms">ENTENDIDO</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-left">MINECRAFT SERVER</div>
+    <div class="footer-center">
+      <span class="f-heart">✦</span>
+      <span>2026 KOUNELI</span>
+    </div>
+    <div class="footer-music">♫ THEME <span class="sound-waves">ıılılı</span></div>
+  </footer>
+
+  <script>
+    /* ===== CONFIGURACIÓN =====
+       Pega aquí la URL de tu implementación de Apps Script (termina en /exec) */
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxtRoCIIQSITLw8y78IwP05AdvhsK_kKb51Ch0suly22m92QCL906-co_vy2CcG1JWI/exec';
+
+    const DEFAULT_AVATAR = 'https://mc-heads.net/avatar/MHF_Steve/128';
+    const NICK_REGEX = /^[A-Za-z0-9_]{3,16}$/;
+    const DEBOUNCE_MS = 800;
+
+    const inputNick = document.getElementById('mc-nickname');
+    const discordInput = document.getElementById('discord-name');
+    const acceptTerms = document.getElementById('accept-terms');
+    const avatarImg = document.getElementById('avatar-preview');
+    const avatarName = document.getElementById('avatar-name');
+    const statusBtn = document.getElementById('status-btn');
+    const statusText = document.getElementById('status-text');
+    const discordLink = document.getElementById('discord-link');
+
+    const CONFIGURED = SCRIPT_URL.startsWith('https://script.google.com');
+
+    let debounceTimer = null;
+    let requestId = 0;          // descarta respuestas viejas si el usuario sigue escribiendo
+    let currentState = 'idle';
+    let currentInvite = '';
+
+    /* ===== COMUNICACIÓN CON APPS SCRIPT ===== */
+    async function consultarEstado(nick) {
+      const res = await fetch(SCRIPT_URL + '?consultar=' + encodeURIComponent(nick), { cache: 'no-store' });
+      if (!res.ok) throw new Error('http ' + res.status);
+      return res.json(); // { estado: 'No existe' | 'Pendiente' | 'Aceptado' | 'Rechazado', invitacion?: string }
+    }
+
+    function estadoAInterfaz(estado) {
+      switch (estado) {
+        case 'Aceptado': return 'invited';
+        case 'Pendiente': return 'pending';
+        case 'Rechazado': return 'rejected';
+        default: return 'available'; // "No existe"
+      }
+    }
+
+    /* ===== INTERFAZ DE ESTADO ===== */
+    function setStatus(state, nick) {
+      currentState = state;
+      const termsChecked = acceptTerms.checked;
+      const canSubmitAvailable = state === 'available' && termsChecked;
+
+      statusBtn.className = 'status-btn ' + state + (state === 'available' && !termsChecked ? ' terms-locked' : '');
+      statusBtn.disabled = !(canSubmitAvailable || state === 'error');
+
+      const showInvite = state === 'invited' && /^https:\/\/(discord\.gg|discord\.com\/invite)\//.test(currentInvite);
+      if (showInvite) discordLink.href = currentInvite;
+      else discordLink.removeAttribute('href');
+      discordLink.classList.toggle('show', showInvite);
+
+      switch (state) {
+        case 'idle':
+          statusBtn.textContent = 'INGRESA TU NICKNAME';
+          statusText.textContent = nick ? 'Nickname inválido: usa de 3 a 16 letras, números o _.' : '';
+          break;
+        case 'checking':
+          statusBtn.textContent = 'CONSULTANDO...';
+          statusText.textContent = '';
+          break;
+        case 'sending':
+          statusBtn.textContent = 'ENVIANDO...';
+          statusText.textContent = 'Enviando tu solicitud...';
+          break;
+        case 'available':
+          statusBtn.textContent = 'SOLICITAR ✦';
+          statusText.textContent = termsChecked
+            ? 'Disponible. Puedes enviar tu solicitud.'
+            : 'Disponible. Acepta los términos y condiciones para poder solicitar.';
+          break;
+        case 'pending':
+          statusBtn.textContent = 'PENDIENTE';
+          statusText.textContent = 'Tu solicitud está en revisión. Vuelve más tarde.';
+          break;
+        case 'invited':
+          statusBtn.textContent = 'ACEPTADO';
+          statusText.textContent = showInvite
+            ? '¡Solicitud aceptada! Únete al Discord:'
+            : '¡Solicitud aceptada! El enlace de invitación aún no está disponible, contacta a un moderador.';
+          break;
+        case 'rejected':
+          statusBtn.textContent = 'RECHAZADO';
+          statusText.textContent = 'Tu solicitud no fue aceptada.';
+          break;
+        case 'error':
+          statusBtn.textContent = 'REINTENTAR';
+          statusText.textContent = CONFIGURED
+            ? 'No se pudo conectar con el servidor. Revisa tu conexión e inténtalo de nuevo.'
+            : 'Falta configurar SCRIPT_URL en el código de la página.';
+          break;
+      }
+    }
+
+    function setAvatar(nick) {
+      if (!nick) {
+        avatarImg.src = DEFAULT_AVATAR;
+        avatarName.textContent = '';
+        return;
+      }
+      // Avatar 2D (MC-Heads, con respaldo en Minotar)
+      const primary = `https://mc-heads.net/avatar/${encodeURIComponent(nick)}/128`;
+      const fallback = `https://minotar.net/helm/${encodeURIComponent(nick)}/128.png`;
+      const probe = new Image();
+      probe.onload = () => { if (inputNick.value.trim() === nick) avatarImg.src = primary; };
+      probe.onerror = () => { if (inputNick.value.trim() === nick) avatarImg.src = fallback; };
+      probe.src = primary;
+      avatarName.textContent = nick;
+    }
+
+    /* ===== FLUJO PRINCIPAL ===== */
+    async function update() {
+      const nick = inputNick.value.trim();
+      const id = ++requestId;
+      currentInvite = '';
+
+      if (!nick) {
+        setAvatar('');
+        setStatus('idle', '');
+        return;
+      }
+
+      if (!NICK_REGEX.test(nick)) {
+        setStatus('idle', nick);
+        return;
+      }
+
+      setAvatar(nick);
+
+      if (!CONFIGURED) { setStatus('error', nick); return; }
+
+      setStatus('checking', nick);
+      try {
+        const data = await consultarEstado(nick);
+        if (id !== requestId) return; // el usuario cambió el nickname mientras tanto
+        currentInvite = String(data.invitacion || '');
+        setStatus(estadoAInterfaz(data.estado), nick);
+      } catch (err) {
+        if (id !== requestId) return;
+        setStatus('error', nick);
+      }
+    }
+
+    async function enviarSolicitud() {
+      const nick = inputNick.value.trim();
+      if (!NICK_REGEX.test(nick) || currentState !== 'available' || !acceptTerms.checked || !CONFIGURED) return;
+
+      const id = ++requestId;
+      const premium = document.querySelector('input[name="premium"]:checked');
+      const body = new URLSearchParams({
+        nick: nick,
+        discord: discordInput.value.trim(),
+        premium: premium ? premium.value : ''
+      });
+
+      setStatus('sending', nick);
+
+      try {
+        // no-cors: no se puede leer la respuesta, así que se confirma consultando el estado
+        await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: body });
+
+        let confirmado = null;
+        for (let intento = 0; intento < 4; intento++) {
+          await new Promise(r => setTimeout(r, 1200));
+          if (id !== requestId) return;
+          const data = await consultarEstado(nick);
+          if (data.estado !== 'No existe') { confirmado = data; break; }
+        }
+
+        if (id !== requestId) return;
+
+        if (confirmado) {
+          currentInvite = String(confirmado.invitacion || '');
+          setStatus(estadoAInterfaz(confirmado.estado), nick);
+          if (confirmado.estado === 'Pendiente') {
+            statusText.textContent = 'Solicitud enviada. Un moderador la revisará; vuelve más tarde para ver el resultado.';
+          }
+        } else {
+          setStatus('available', nick);
+          statusText.textContent = 'No se pudo confirmar el envío. Inténtalo de nuevo.';
+        }
+      } catch (err) {
+        if (id !== requestId) return;
+        setStatus('error', nick);
+      }
+    }
+
+    /* ===== EVENTOS ===== */
+    inputNick.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      requestId++;               // invalida cualquier consulta en curso
+      currentInvite = '';
+
+      const nick = inputNick.value.trim();
+      if (!nick || !NICK_REGEX.test(nick)) {
+        update();                // actualiza al instante (sin llamar al servidor)
+        return;
+      }
+      setAvatar(nick);
+      setStatus('checking', nick);
+      debounceTimer = setTimeout(update, DEBOUNCE_MS);
+    });
+
+    inputNick.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        clearTimeout(debounceTimer);
+        update();
+      }
+    });
+
+    acceptTerms.addEventListener('change', () => {
+      if (currentState === 'available') {
+        setStatus('available', inputNick.value.trim());
+      }
+    });
+
+    statusBtn.addEventListener('click', () => {
+      if (currentState === 'available' && acceptTerms.checked) enviarSolicitud();
+      else if (currentState === 'error') update();
+    });
+
+    // Modal de términos
+    const modal = document.getElementById('terms-modal');
+    const openModal = () => modal.classList.add('open');
+    const closeModal = () => modal.classList.remove('open');
+
+    document.getElementById('open-terms').addEventListener('click', openModal);
+    document.getElementById('close-terms').addEventListener('click', closeModal);
+    document.getElementById('ok-terms').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  </script>
+</body>
+</html>
