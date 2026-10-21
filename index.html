@@ -98,5 +98,40 @@
     </a>
   </div>
 
+  <audio id="bg-music" src="assets/audio/endless-horizon.mp3" loop preload="auto"></audio>
+  <script>
+    const bgMusic = document.getElementById('bg-music');
+    bgMusic.volume = 0.35;
+
+    const savedTime = parseFloat(sessionStorage.getItem('kouneli_bgm_time') || '0');
+    if (savedTime > 0) {
+      bgMusic.addEventListener('loadedmetadata', () => {
+        if (savedTime < bgMusic.duration) bgMusic.currentTime = savedTime;
+      }, { once: true });
+    }
+
+    function saveProgress() {
+      if (!bgMusic.paused) {
+        sessionStorage.setItem('kouneli_bgm_time', String(bgMusic.currentTime));
+      }
+    }
+
+    bgMusic.addEventListener('timeupdate', saveProgress);
+    window.addEventListener('pagehide', saveProgress);
+
+    if (sessionStorage.getItem('kouneli_bgm_paused') !== '1') {
+      bgMusic.play().catch(() => {
+        const resumeOnInteract = () => {
+          if (sessionStorage.getItem('kouneli_bgm_paused') !== '1') {
+            bgMusic.play().catch(() => {});
+          }
+          window.removeEventListener('pointerdown', resumeOnInteract);
+          window.removeEventListener('keydown', resumeOnInteract);
+        };
+        window.addEventListener('pointerdown', resumeOnInteract);
+        window.addEventListener('keydown', resumeOnInteract);
+      });
+    }
+  </script>
 </body>
 </html>

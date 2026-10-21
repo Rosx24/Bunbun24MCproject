@@ -40,9 +40,6 @@
     justify-content: space-between;
     overflow-x: hidden;
     position: relative;
-    background-image:
-      radial-gradient(ellipse at 75% 35%, rgba(52, 104, 92, 0.3) 0%, transparent 60%),
-      radial-gradient(circle at 15% 80%, rgba(237, 149, 48, 0.08) 0%, transparent 50%);
   }
 
   .stars-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
@@ -76,8 +73,8 @@
     background-size: cover;
     background-position: center 25%;
     filter: brightness(0.9) contrast(1.04) saturate(1.08);
-    mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgba(0,0,0,0.6) 75%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgba(0,0,0,0.6) 75%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgba(0,0,0,0.5) 75%, transparent 98%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgba(0,0,0,0.5) 75%, transparent 98%);
   }
 
   .header-bg-gradient {
@@ -85,7 +82,7 @@
     inset: 0;
     background:
       linear-gradient(180deg, rgba(13, 27, 34, 0.65) 0%, rgba(13, 27, 34, 0) 18%),
-      linear-gradient(180deg, transparent 40%, rgba(20, 40, 49, 0.7) 72%, var(--bg) 100%);
+      linear-gradient(180deg, transparent 35%, rgba(20, 40, 49, 0.7) 72%, var(--bg) 98%, var(--bg) 100%);
   }
 
   nav {
@@ -300,6 +297,9 @@
   }
 
   .footer-left, .footer-music { font-family: var(--font-pixel); font-size: 0.58rem; }
+  .footer-music { display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; transition: color 0.2s; }
+  .footer-music:hover { color: var(--c-cream); }
+  .footer-music.paused .sound-waves { animation: none; opacity: 0.3; }
   .footer-center { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; letter-spacing: 1px; }
   .footer-center .f-heart { color: var(--c-red); }
   .sound-waves { color: var(--c-cream); letter-spacing: 2px; animation: wavePulse 1s steps(2) infinite alternate; }
@@ -366,71 +366,167 @@
       <span class="f-heart">✦</span>
       <span>2026 KOUNELI</span>
     </div>
-    <div class="footer-music">♫ THEME <span class="sound-waves">ıılılı</span></div>
+    <div class="footer-music" id="music-toggle" title="Pausar / Reproducir música">
+      <span>♫ Endless Horizon - Kaddebleh</span>
+      <span class="sound-waves">ıılılı</span>
+    </div>
   </footer>
 
+  <audio id="bg-music" src="../assets/audio/endless-horizon.mp3" loop preload="auto"></audio>
+
   <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxtRoCIIQSITLw8y78IwP05AdvhsK_kKb51Ch0suly22m92QCL906-co_vy2CcG1JWI/exec';
+
     const BASE_ADMITTED = ['Rosx24'];
 
-    function loadAdmittedMembers() {
-      const list = [...BASE_ADMITTED];
-      const seen = new Set(list.map(n => n.toLowerCase()));
+    const NICK_REGEX = /^[A-Za-z0-9_]{3,16}$/;
+    const CONFIGURED = SCRIPT_URL.startsWith('https://script.google.com/');
 
-      const storedMembers = JSON.parse(localStorage.getItem('kouneli_members') || '[]');
-      storedMembers.forEach(entry => {
-        const nick = typeof entry === 'string' ? entry : entry.nick;
-        if (nick && !seen.has(nick.toLowerCase())) {
-          seen.add(nick.toLowerCase());
-          list.push(nick);
+    const listEl = document.getElementById('members-list');
+    const countEl = document.getElementById('members-count');
+
+    function mergeMembers(remote) {
+      const list = [];
+      const seen = new Set();
+      [...BASE_ADMITTED, ...remote].forEach(nick => {
+        const n = String(nick || '').trim();
+        const key = n.toLowerCase();
+        if (NICK_REGEX.test(n) && !seen.has(key)) {
+          seen.add(key);
+          list.push(n);
         }
       });
-
-      const storedPending = JSON.parse(localStorage.getItem('kouneli_pending') || '[]');
-      storedPending.forEach(nick => {
-        if (nick && !seen.has(nick.toLowerCase())) {
-          seen.add(nick.toLowerCase());
-          list.push(nick);
-        }
-      });
-
       return list;
     }
 
-    function renderMembers() {
-      const members = loadAdmittedMembers();
-      const ol = document.getElementById('members-list');
-      const countEl = document.getElementById('members-count');
-
+    function renderMembers(members) {
       countEl.textContent = `TOTAL: ${members.length}`;
-      ol.innerHTML = '';
+      listEl.replaceChildren();
 
       members.forEach((nick, index) => {
         const li = document.createElement('li');
         li.className = 'member-item';
 
-        const num = String(index + 1).padStart(2, '0');
-        const primaryAvatar = `https://mc-heads.net/avatar/${encodeURIComponent(nick)}/64`;
-        const fallbackAvatar = `https://minotar.net/helm/${encodeURIComponent(nick)}/64.png`;
+        const num = document.createElement('span');
+        num.className = 'member-index';
+        num.textContent = '#' + String(index + 1).padStart(2, '0');
 
-        li.innerHTML = `
-          <span class="member-index">#${num}</span>
-          <div class="member-avatar-frame">
-            <img class="member-avatar" src="${primaryAvatar}" alt="${nick}" onerror="this.onerror=null;this.src='${fallbackAvatar}';">
-          </div>
-          <div class="member-info">
-            <span class="member-nick"></span>
-          </div>
-          <span class="member-badge">ADMITIDO</span>
-        `;
+        const frame = document.createElement('div');
+        frame.className = 'member-avatar-frame';
+        const img = document.createElement('img');
+        img.className = 'member-avatar';
+        img.alt = nick;
+        img.src = `https://mc-heads.net/avatar/${encodeURIComponent(nick)}/64`;
+        img.onerror = () => {
+          img.onerror = null;
+          img.src = `https://minotar.net/helm/${encodeURIComponent(nick)}/64.png`;
+        };
+        frame.appendChild(img);
 
-        li.querySelector('.member-nick').textContent = nick;
-        ol.appendChild(li);
+        const info = document.createElement('div');
+        info.className = 'member-info';
+        const name = document.createElement('span');
+        name.className = 'member-nick';
+        name.textContent = nick;
+        info.appendChild(name);
+
+        const badge = document.createElement('span');
+        badge.className = 'member-badge';
+        badge.textContent = 'ADMITIDO';
+
+        li.append(num, frame, info, badge);
+        listEl.appendChild(li);
       });
     }
 
-    renderMembers();
-    window.addEventListener('storage', renderMembers);
+    function showNote(text) {
+      const old = document.getElementById('members-note');
+      if (old) old.remove();
+      if (!text) return;
+      const p = document.createElement('p');
+      p.id = 'members-note';
+      p.style.cssText = 'margin-top:16px;text-align:center;font-size:0.85rem;color:var(--text-muted);';
+      p.textContent = text;
+      listEl.after(p);
+    }
+
+    async function loadMembers() {
+      renderMembers(mergeMembers([]));
+
+      if (!CONFIGURED) {
+        showNote('Falta configurar SCRIPT_URL en el código de la página.');
+        return;
+      }
+
+      try {
+        const res = await fetch(SCRIPT_URL, { cache: 'no-store' });
+        if (!res.ok) throw new Error('http ' + res.status);
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error('formato inesperado');
+        renderMembers(mergeMembers(data));
+        showNote('');
+      } catch (err) {
+        console.error(err);
+        showNote('No se pudo actualizar la lista. Recarga la página en unos minutos.');
+      }
+    }
+
+    loadMembers();
+
+    const bgMusic = document.getElementById('bg-music');
+    const musicToggle = document.getElementById('music-toggle');
+    bgMusic.volume = 0.35;
+
+    const savedTime = parseFloat(sessionStorage.getItem('kouneli_bgm_time') || '0');
+    if (savedTime > 0) {
+      bgMusic.addEventListener('loadedmetadata', () => {
+        if (savedTime < bgMusic.duration) bgMusic.currentTime = savedTime;
+      }, { once: true });
+    }
+
+    function updateMusicUI() {
+      musicToggle.classList.toggle('paused', bgMusic.paused);
+    }
+
+    function saveProgress() {
+      if (!bgMusic.paused) {
+        sessionStorage.setItem('kouneli_bgm_time', String(bgMusic.currentTime));
+      }
+    }
+
+    bgMusic.addEventListener('play', updateMusicUI);
+    bgMusic.addEventListener('pause', updateMusicUI);
+    bgMusic.addEventListener('timeupdate', saveProgress);
+    window.addEventListener('pagehide', saveProgress);
+
+    musicToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (bgMusic.paused) {
+        sessionStorage.setItem('kouneli_bgm_paused', '0');
+        bgMusic.play().catch(() => {});
+      } else {
+        sessionStorage.setItem('kouneli_bgm_paused', '1');
+        bgMusic.pause();
+      }
+      updateMusicUI();
+    });
+
+    if (sessionStorage.getItem('kouneli_bgm_paused') !== '1') {
+      bgMusic.play().then(updateMusicUI).catch(() => {
+        updateMusicUI();
+        const resumeOnInteract = () => {
+          if (sessionStorage.getItem('kouneli_bgm_paused') !== '1') {
+            bgMusic.play().then(updateMusicUI).catch(() => {});
+          }
+          window.removeEventListener('pointerdown', resumeOnInteract);
+          window.removeEventListener('keydown', resumeOnInteract);
+        };
+        window.addEventListener('pointerdown', resumeOnInteract);
+        window.addEventListener('keydown', resumeOnInteract);
+      });
+    } else {
+      updateMusicUI();
+    }
   </script>
 </body>
 </html>
-

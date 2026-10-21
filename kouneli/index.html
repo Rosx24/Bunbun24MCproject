@@ -46,9 +46,6 @@
     justify-content: space-between;
     overflow-x: hidden;
     position: relative;
-    background-image: 
-      radial-gradient(ellipse at 75% 35%, rgba(52, 104, 92, 0.3) 0%, transparent 60%),
-      radial-gradient(circle at 15% 80%, rgba(237, 149, 48, 0.08) 0%, transparent 50%);
   }
 
   .stars-bg {
@@ -95,15 +92,15 @@
     filter: brightness(0.9) contrast(1.04) saturate(1.08);
     mask-image: linear-gradient(to bottom, 
       rgba(0, 0, 0, 1) 0%, 
-      rgba(0, 0, 0, 1) 50%, 
-      rgba(0, 0, 0, 0.75) 75%, 
-      rgba(0, 0, 0, 0) 100%
+      rgba(0, 0, 0, 1) 45%, 
+      rgba(0, 0, 0, 0.5) 75%, 
+      rgba(0, 0, 0, 0) 98%
     );
     -webkit-mask-image: linear-gradient(to bottom, 
       rgba(0, 0, 0, 1) 0%, 
-      rgba(0, 0, 0, 1) 50%, 
-      rgba(0, 0, 0, 0.75) 75%, 
-      rgba(0, 0, 0, 0) 100%
+      rgba(0, 0, 0, 1) 45%, 
+      rgba(0, 0, 0, 0.5) 75%, 
+      rgba(0, 0, 0, 0) 98%
     );
   }
 
@@ -112,8 +109,7 @@
     inset: 0;
     background: 
       linear-gradient(180deg, rgba(13, 27, 34, 0.65) 0%, rgba(13, 27, 34, 0) 18%),
-      linear-gradient(180deg, transparent 40%, rgba(20, 40, 49, 0.6) 72%, var(--bg) 100%),
-      radial-gradient(ellipse at 25% 45%, rgba(13, 27, 34, 0.6) 0%, rgba(13, 27, 34, 0.2) 50%, transparent 70%);
+      linear-gradient(180deg, transparent 35%, rgba(20, 40, 49, 0.7) 72%, var(--bg) 98%, var(--bg) 100%);
   }
 
   nav {
@@ -243,6 +239,8 @@
     z-index: 2;
     padding: 10px 6vw 40px;
     max-width: 1300px;
+    padding: 10px clamp(24px, 3.5vw, 52px) 40px;
+    max-width: 100%;
     margin: 0 auto;
     width: 100%;
   }
@@ -310,12 +308,56 @@
     color: var(--c-red);
   }
 
+  .desc-box {
+    max-width: 950px;
+    margin: 10px auto 24px;
+    max-width: 100%;
+    margin: 10px auto 20px;
+    width: 100%;
+    text-align: left;
+    gap: 14px;
+  }
+
+  .desc-title {
+    font-family: var(--font-pixel);
+    font-size: clamp(1rem, 2.2vw, 1.3rem);
+    color: var(--c-cream);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .desc-title .dot {
+    color: var(--c-red);
+    font-size: 0.95rem;
+  }
+
+  .desc-box p {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: #ffffff;
+  }
+
+  .desc-sign {
+    margin-top: 4px;
+    font-family: var(--font-pixel);
+    font-size: 0.72rem;
+    color: var(--c-olive);
+    font-style: italic;
+    letter-spacing: 1.5px;
+    align-self: flex-end;
+  }
+
   .hud-container {
     display: grid;
     grid-template-columns: 1.25fr 1fr;
     gap: 20px;
     max-width: 950px;
     margin: 28px auto 0;
+    max-width: 100%;
+    margin: 20px auto 0;
     width: 100%;
   }
 
@@ -478,6 +520,18 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s;
+  }
+
+  .footer-music:hover {
+    color: var(--c-cream);
+  }
+
+  .footer-music.paused .sound-waves {
+    animation: none;
+    opacity: 0.3;
   }
 
   .sound-waves {
@@ -725,6 +779,15 @@
       </div>
     </div>
 
+    <div class="hud-box desc-box">
+      <h2 class="desc-title"><span class="dot">✦</span><span>KOUNELI</span></h2>
+      <p>Kouneli es un servidor de Minecraft enfocado en los mods, desarrollado sobre un modpack de Forge para la versión 1.20.1, creado con anterioridad.</p>
+      <p>Este es un proyecto personal de gran importancia para mí. Es el resultado de varios años desarrollando servidores para amigos, y representa la puesta en práctica de mis conocimientos más avanzados, orientada a las cosas que más disfruto. Espero que a ustedes también les resulte una experiencia agradable.</p>
+      <p>Para cualquier duda o inconveniente, se debe abrir un ticket en el servidor de Discord.</p>
+      <p>Se agradece cualquier donación, que es completamente voluntaria, como apoyo para continuar con el desarrollo del proyecto y futuros proyectos!.</p>
+      <span class="desc-sign">Rosx</span>
+    </div>
+
     <div class="hud-container" id="apertura">
       <div class="hud-box">
         <div class="countdown-timer-grid">
@@ -752,7 +815,7 @@
           <div class="quote-icon">✦</div>
           <div class="quote-body">
             <p>"Seguimos esperando por la conexión."</p>
-            <p class="quote-author">- Kouneli · 22 de Noviembre</p>
+            <p class="quote-author">- Kouneli · 20 de Noviembre</p>
           </div>
         </div>
       </div>
@@ -777,11 +840,13 @@
       <span>2026 KOUNELI</span>
     </div>
 
-    <div class="footer-music">
-      <span>♫ THEME</span>
+    <div class="footer-music" id="music-toggle" title="Pausar / Reproducir música">
+      <span>♫ Endless Horizon - Kaddebleh</span>
       <span class="sound-waves">ıılılı</span>
     </div>
   </footer>
+
+  <audio id="bg-music" src="../assets/audio/endless-horizon.mp3" loop preload="auto"></audio>
 
   <script>
     let year = new Date().getFullYear();
@@ -812,70 +877,167 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxtRoCIIQSITLw8y78IwP05AdvhsK_kKb51Ch0suly22m92QCL906-co_vy2CcG1JWI/exec';
+    const BASE_ADMITTED = ['Rosx24'];
+    const NICK_REGEX = /^[A-Za-z0-9_]{3,16}$/;
+    const CONFIGURED = SCRIPT_URL.startsWith('https://script.google.com/');
+    const REFRESH_MS = 5 * 60 * 1000;
+
     const sidebar = document.getElementById('members-sidebar');
     const openSidebarBtn = document.getElementById('open-sidebar');
     const closeSidebarBtn = document.getElementById('close-sidebar');
     const sidebarList = document.getElementById('sidebar-members-list');
 
-    function loadAdmittedMembers() {
-      const list = ['Rosx24'];
-      const seen = new Set(list.map(n => n.toLowerCase()));
+    let remoteMembers = [];
+    let lastFetch = 0;
+    let fetching = false;
 
-      const storedMembers = JSON.parse(localStorage.getItem('kouneli_members') || '[]');
-      storedMembers.forEach(entry => {
-        const nick = typeof entry === 'string' ? entry : entry.nick;
-        if (nick && !seen.has(nick.toLowerCase())) {
-          seen.add(nick.toLowerCase());
-          list.push(nick);
+    function mergeMembers(remote) {
+      const list = [];
+      const seen = new Set();
+      [...BASE_ADMITTED, ...remote].forEach(nick => {
+        const n = String(nick || '').trim();
+        const key = n.toLowerCase();
+        if (NICK_REGEX.test(n) && !seen.has(key)) {
+          seen.add(key);
+          list.push(n);
         }
       });
-
-      const storedPending = JSON.parse(localStorage.getItem('kouneli_pending') || '[]');
-      storedPending.forEach(nick => {
-        if (nick && !seen.has(nick.toLowerCase())) {
-          seen.add(nick.toLowerCase());
-          list.push(nick);
-        }
-      });
-
       return list;
     }
 
-    function renderSidebarMembers() {
-      const members = loadAdmittedMembers();
-      sidebarList.innerHTML = '';
+    function renderSidebarMembers(note) {
+      const members = mergeMembers(remoteMembers);
+      sidebarList.replaceChildren();
 
       members.forEach((nick, index) => {
         const li = document.createElement('li');
         li.className = 'sb-member-item';
-        const num = String(index + 1).padStart(2, '0');
-        const primaryAvatar = `https://mc-heads.net/avatar/${encodeURIComponent(nick)}/64`;
-        const fallbackAvatar = `https://minotar.net/helm/${encodeURIComponent(nick)}/64.png`;
 
-        li.innerHTML = `
-          <span class="sb-member-index">#${num}</span>
-          <div class="sb-avatar-frame">
-            <img class="sb-avatar" src="${primaryAvatar}" alt="${nick}" onerror="this.onerror=null;this.src='${fallbackAvatar}';">
-          </div>
-          <span class="sb-member-nick"></span>
-        `;
-        li.querySelector('.sb-member-nick').textContent = nick;
+        const num = document.createElement('span');
+        num.className = 'sb-member-index';
+        num.textContent = '#' + String(index + 1).padStart(2, '0');
+
+        const frame = document.createElement('div');
+        frame.className = 'sb-avatar-frame';
+        const img = document.createElement('img');
+        img.className = 'sb-avatar';
+        img.alt = nick;
+        img.src = `https://mc-heads.net/avatar/${encodeURIComponent(nick)}/64`;
+        img.onerror = () => {
+          img.onerror = null;
+          img.src = `https://minotar.net/helm/${encodeURIComponent(nick)}/64.png`;
+        };
+        frame.appendChild(img);
+
+        const name = document.createElement('span');
+        name.className = 'sb-member-nick';
+        name.textContent = nick;
+
+        li.append(num, frame, name);
         sidebarList.appendChild(li);
       });
+
+      if (note) {
+        const li = document.createElement('li');
+        li.style.cssText = 'font-size:0.8rem;color:var(--text-muted);text-align:center;padding:6px 0;';
+        li.textContent = note;
+        sidebarList.appendChild(li);
+      }
     }
 
-    openSidebarBtn.addEventListener('click', () => {
-      renderSidebarMembers();
-      sidebar.classList.add('open');
-    });
+    async function refreshMembers(force) {
+      if (!CONFIGURED) { renderSidebarMembers('Falta configurar SCRIPT_URL.'); return; }
+      if (fetching || (!force && Date.now() - lastFetch < 30000)) return;
+      fetching = true;
+      try {
+        const res = await fetch(SCRIPT_URL, { cache: 'no-store' });
+        if (!res.ok) throw new Error('http ' + res.status);
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error('formato inesperado');
+        remoteMembers = data;
+        lastFetch = Date.now();
+        renderSidebarMembers();
+      } catch (err) {
+        console.error(err);
+        renderSidebarMembers('No se pudo actualizar la lista.');
+      } finally {
+        fetching = false;
+      }
+    }
 
-    closeSidebarBtn.addEventListener('click', () => {
+    function openSidebar() {
+      sidebar.classList.add('open');
+      renderSidebarMembers();
+      refreshMembers(false);
+    }
+
+    function closeSidebar() {
       sidebar.classList.remove('open');
-    });
+    }
+
+    openSidebarBtn.addEventListener('click', openSidebar);
+    closeSidebarBtn.addEventListener('click', closeSidebar);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSidebar(); });
 
     renderSidebarMembers();
-    window.addEventListener('storage', renderSidebarMembers);
+    refreshMembers(true);
+    setInterval(() => refreshMembers(true), REFRESH_MS);
+
+    const bgMusic = document.getElementById('bg-music');
+    const musicToggle = document.getElementById('music-toggle');
+    bgMusic.volume = 0.35;
+
+    const savedTime = parseFloat(sessionStorage.getItem('kouneli_bgm_time') || '0');
+    if (savedTime > 0) {
+      bgMusic.addEventListener('loadedmetadata', () => {
+        if (savedTime < bgMusic.duration) bgMusic.currentTime = savedTime;
+      }, { once: true });
+    }
+
+    function updateMusicUI() {
+      musicToggle.classList.toggle('paused', bgMusic.paused);
+    }
+
+    function saveProgress() {
+      if (!bgMusic.paused) {
+        sessionStorage.setItem('kouneli_bgm_time', String(bgMusic.currentTime));
+      }
+    }
+
+    bgMusic.addEventListener('play', updateMusicUI);
+    bgMusic.addEventListener('pause', updateMusicUI);
+    bgMusic.addEventListener('timeupdate', saveProgress);
+    window.addEventListener('pagehide', saveProgress);
+
+    musicToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (bgMusic.paused) {
+        sessionStorage.setItem('kouneli_bgm_paused', '0');
+        bgMusic.play().catch(() => {});
+      } else {
+        sessionStorage.setItem('kouneli_bgm_paused', '1');
+        bgMusic.pause();
+      }
+      updateMusicUI();
+    });
+
+    if (sessionStorage.getItem('kouneli_bgm_paused') !== '1') {
+      bgMusic.play().then(updateMusicUI).catch(() => {
+        updateMusicUI();
+        const resumeOnInteract = () => {
+          if (sessionStorage.getItem('kouneli_bgm_paused') !== '1') {
+            bgMusic.play().then(updateMusicUI).catch(() => {});
+          }
+          window.removeEventListener('pointerdown', resumeOnInteract);
+          window.removeEventListener('keydown', resumeOnInteract);
+        };
+        window.addEventListener('pointerdown', resumeOnInteract);
+        window.addEventListener('keydown', resumeOnInteract);
+      });
+    } else {
+      updateMusicUI();
+    }
   </script>
 </body>
 </html>
-

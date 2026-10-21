@@ -40,9 +40,6 @@
     justify-content: space-between;
     overflow-x: hidden;
     position: relative;
-    background-image:
-      radial-gradient(ellipse at 75% 35%, rgba(52, 104, 92, 0.3) 0%, transparent 60%),
-      radial-gradient(circle at 15% 80%, rgba(237, 149, 48, 0.08) 0%, transparent 50%);
   }
 
   .stars-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
@@ -76,8 +73,8 @@
     background-size: cover;
     background-position: center 25%;
     filter: brightness(0.9) contrast(1.04) saturate(1.08);
-    mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgba(0,0,0,0.6) 75%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgba(0,0,0,0.6) 75%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgba(0,0,0,0.5) 75%, transparent 98%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, rgba(0,0,0,0.5) 75%, transparent 98%);
   }
 
   .header-bg-gradient {
@@ -85,7 +82,7 @@
     inset: 0;
     background:
       linear-gradient(180deg, rgba(13, 27, 34, 0.65) 0%, rgba(13, 27, 34, 0) 18%),
-      linear-gradient(180deg, transparent 40%, rgba(20, 40, 49, 0.7) 72%, var(--bg) 100%);
+      linear-gradient(180deg, transparent 35%, rgba(20, 40, 49, 0.7) 72%, var(--bg) 98%, var(--bg) 100%);
   }
 
   nav {
@@ -553,11 +550,134 @@
   }
 
   .footer-left, .footer-music { font-family: var(--font-pixel); font-size: 0.58rem; }
+  .footer-music { display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; transition: color 0.2s; }
+  .footer-music:hover { color: var(--c-cream); }
+  .footer-music.paused .sound-waves { animation: none; opacity: 0.3; }
   .footer-center { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; letter-spacing: 1px; }
   .footer-center .f-heart { color: var(--c-red); }
   .sound-waves { color: var(--c-cream); letter-spacing: 2px; animation: wavePulse 1s steps(2) infinite alternate; }
 
   @keyframes wavePulse { 0% { opacity: 0.4; } 100% { opacity: 1; } }
+
+  /* ===== DESPLEGABLE DE ADMITIDOS ===== */
+  .sidebar-toggle {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 45;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-family: var(--font-pixel);
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    color: #ffffff;
+    background: var(--c-midnight);
+    border: 2px solid var(--c-cream);
+    border-left: none;
+    padding: 16px 10px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 #0a171d;
+    transition: all 0.15s;
+  }
+
+  .sidebar-toggle:hover { background: var(--c-teal); color: var(--c-cream); padding-left: 14px; }
+
+  .members-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 320px;
+    max-width: 88vw;
+    background: var(--bg-box);
+    border-right: 3px solid var(--border-box);
+    z-index: 60;
+    transform: translateX(-102%);
+    transition: transform 0.25s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.6);
+  }
+
+  .members-sidebar.open { transform: translateX(0); }
+
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 18px;
+    border-bottom: 2px solid rgba(52, 104, 92, 0.6);
+  }
+
+  .sidebar-title {
+    font-family: var(--font-pixel);
+    font-size: 0.72rem;
+    color: var(--c-cream);
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sidebar-title .dot { color: var(--c-red); }
+
+  .sidebar-close {
+    background: none;
+    border: 2px solid var(--c-teal);
+    color: #ffffff;
+    font-family: var(--font-pixel);
+    font-size: 0.65rem;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+
+  .sidebar-close:hover { border-color: var(--c-cream); color: var(--c-cream); }
+
+  .sidebar-list {
+    list-style: none;
+    padding: 16px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sb-member-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #0e2028;
+    border: 2px solid var(--c-teal);
+    padding: 10px 12px;
+  }
+
+  .sb-member-index { font-family: var(--font-pixel); font-size: 0.65rem; color: var(--c-olive); min-width: 28px; }
+
+  .sb-avatar-frame {
+    width: 40px;
+    height: 40px;
+    background: #081318;
+    border: 2px solid var(--c-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .sb-avatar { width: 34px; height: 34px; image-rendering: pixelated; image-rendering: crisp-edges; display: block; }
+
+  .sb-member-nick {
+    font-family: var(--font-pixel);
+    font-size: 0.68rem;
+    color: #ffffff;
+    letter-spacing: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
   @media (max-width: 650px) {
     .reg-box { padding: 24px 18px; }
@@ -581,6 +701,21 @@
     <div class="star" style="top: 80%; left: 88%; background: var(--c-amber); animation-delay: 0.3s;"></div>
     <div class="star" style="top: 55%; left: 35%; background: var(--c-red); animation-delay: 1.1s;"></div>
   </div>
+
+  <button type="button" class="sidebar-toggle" id="open-sidebar" aria-label="Abrir lista de admitidos">
+    ✦ ADMITIDOS
+  </button>
+
+  <aside class="members-sidebar" id="members-sidebar" aria-label="Miembros admitidos">
+    <div class="sidebar-header">
+      <span class="sidebar-title">
+        <span class="dot">✦</span>
+        <span>ADMITIDOS</span>
+      </span>
+      <button type="button" class="sidebar-close" id="close-sidebar" aria-label="Cerrar">✕</button>
+    </div>
+    <ol class="sidebar-list" id="sidebar-members-list"></ol>
+  </aside>
 
   <nav>
     <a href="../kouneli/" class="nav-logo">
@@ -826,8 +961,13 @@
       <span class="f-heart">✦</span>
       <span>2026 KOUNELI</span>
     </div>
-    <div class="footer-music">♫ THEME <span class="sound-waves">ıılılı</span></div>
+    <div class="footer-music" id="music-toggle" title="Pausar / Reproducir música">
+      <span>♫ Endless Horizon - Kaddebleh</span>
+      <span class="sound-waves">ıılılı</span>
+    </div>
   </footer>
+
+  <audio id="bg-music" src="../assets/audio/endless-horizon.mp3" loop preload="auto"></audio>
 
   <script>
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxtRoCIIQSITLw8y78IwP05AdvhsK_kKb51Ch0suly22m92QCL906-co_vy2CcG1JWI/exec';
@@ -1054,7 +1194,165 @@
     document.getElementById('ok-terms').addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    const BASE_ADMITTED = ['Rosx24'];
+    const REFRESH_MS = 5 * 60 * 1000;
+
+    const sidebar = document.getElementById('members-sidebar');
+    const openSidebarBtn = document.getElementById('open-sidebar');
+    const closeSidebarBtn = document.getElementById('close-sidebar');
+    const sidebarList = document.getElementById('sidebar-members-list');
+
+    let remoteMembers = [];
+    let lastFetch = 0;
+    let fetching = false;
+
+    function mergeMembers(remote) {
+      const list = [];
+      const seen = new Set();
+      [...BASE_ADMITTED, ...remote].forEach(nick => {
+        const n = String(nick || '').trim();
+        const key = n.toLowerCase();
+        if (NICK_REGEX.test(n) && !seen.has(key)) {
+          seen.add(key);
+          list.push(n);
+        }
+      });
+      return list;
+    }
+
+    function renderSidebarMembers(note) {
+      const members = mergeMembers(remoteMembers);
+      sidebarList.replaceChildren();
+
+      members.forEach((nick, index) => {
+        const li = document.createElement('li');
+        li.className = 'sb-member-item';
+
+        const num = document.createElement('span');
+        num.className = 'sb-member-index';
+        num.textContent = '#' + String(index + 1).padStart(2, '0');
+
+        const frame = document.createElement('div');
+        frame.className = 'sb-avatar-frame';
+        const img = document.createElement('img');
+        img.className = 'sb-avatar';
+        img.alt = nick;
+        img.src = `https://mc-heads.net/avatar/${encodeURIComponent(nick)}/64`;
+        img.onerror = () => {
+          img.onerror = null;
+          img.src = `https://minotar.net/helm/${encodeURIComponent(nick)}/64.png`;
+        };
+        frame.appendChild(img);
+
+        const name = document.createElement('span');
+        name.className = 'sb-member-nick';
+        name.textContent = nick;
+
+        li.append(num, frame, name);
+        sidebarList.appendChild(li);
+      });
+
+      if (note) {
+        const li = document.createElement('li');
+        li.style.cssText = 'font-size:0.8rem;color:var(--text-muted);text-align:center;padding:6px 0;';
+        li.textContent = note;
+        sidebarList.appendChild(li);
+      }
+    }
+
+    async function refreshMembers(force) {
+      if (!CONFIGURED) { renderSidebarMembers('Falta configurar SCRIPT_URL.'); return; }
+      if (fetching || (!force && Date.now() - lastFetch < 30000)) return;
+      fetching = true;
+      try {
+        const res = await fetch(SCRIPT_URL, { cache: 'no-store' });
+        if (!res.ok) throw new Error('http ' + res.status);
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error('formato inesperado');
+        remoteMembers = data;
+        lastFetch = Date.now();
+        renderSidebarMembers();
+      } catch (err) {
+        console.error(err);
+        renderSidebarMembers('No se pudo actualizar la lista.');
+      } finally {
+        fetching = false;
+      }
+    }
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      renderSidebarMembers();
+      refreshMembers(false);
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+    }
+
+    openSidebarBtn.addEventListener('click', openSidebar);
+    closeSidebarBtn.addEventListener('click', closeSidebar);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSidebar(); });
+
+    renderSidebarMembers();
+    refreshMembers(true);
+    setInterval(() => refreshMembers(true), REFRESH_MS);
+
+    const bgMusic = document.getElementById('bg-music');
+    const musicToggle = document.getElementById('music-toggle');
+    bgMusic.volume = 0.35;
+
+    const savedTime = parseFloat(sessionStorage.getItem('kouneli_bgm_time') || '0');
+    if (savedTime > 0) {
+      bgMusic.addEventListener('loadedmetadata', () => {
+        if (savedTime < bgMusic.duration) bgMusic.currentTime = savedTime;
+      }, { once: true });
+    }
+
+    function updateMusicUI() {
+      musicToggle.classList.toggle('paused', bgMusic.paused);
+    }
+
+    function saveProgress() {
+      if (!bgMusic.paused) {
+        sessionStorage.setItem('kouneli_bgm_time', String(bgMusic.currentTime));
+      }
+    }
+
+    bgMusic.addEventListener('play', updateMusicUI);
+    bgMusic.addEventListener('pause', updateMusicUI);
+    bgMusic.addEventListener('timeupdate', saveProgress);
+    window.addEventListener('pagehide', saveProgress);
+
+    musicToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (bgMusic.paused) {
+        sessionStorage.setItem('kouneli_bgm_paused', '0');
+        bgMusic.play().catch(() => {});
+      } else {
+        sessionStorage.setItem('kouneli_bgm_paused', '1');
+        bgMusic.pause();
+      }
+      updateMusicUI();
+    });
+
+    if (sessionStorage.getItem('kouneli_bgm_paused') !== '1') {
+      bgMusic.play().then(updateMusicUI).catch(() => {
+        updateMusicUI();
+        const resumeOnInteract = () => {
+          if (sessionStorage.getItem('kouneli_bgm_paused') !== '1') {
+            bgMusic.play().then(updateMusicUI).catch(() => {});
+          }
+          window.removeEventListener('pointerdown', resumeOnInteract);
+          window.removeEventListener('keydown', resumeOnInteract);
+        };
+        window.addEventListener('pointerdown', resumeOnInteract);
+        window.addEventListener('keydown', resumeOnInteract);
+      });
+    } else {
+      updateMusicUI();
+    }
   </script>
 </body>
 </html>
-
