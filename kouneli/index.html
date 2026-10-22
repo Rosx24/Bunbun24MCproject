@@ -405,19 +405,47 @@
     display: flex;
     align-items: center;
     gap: 18px;
+    overflow: hidden;
   }
 
-  .quote-icon {
-    font-size: 2.2rem;
-    color: var(--c-cream);
+  .quote-avatar-frame {
+    width: 60px;
+    height: 60px;
+    background: #ffffff;
+    border: 3px solid var(--c-cream);
+    box-shadow: 0 4px 0 #050c10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
-    line-height: 1;
+    overflow: hidden;
+  }
+
+  .quote-avatar-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    shape-rendering: crispEdges;
   }
 
   .quote-body {
     font-size: 1.05rem;
     line-height: 1.5;
     color: #ffffff;
+    transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.38s ease;
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .quote-body.slide-out-down {
+    transform: translateY(26px);
+    opacity: 0;
+  }
+
+  .quote-body.slide-in-top {
+    transition: none;
+    transform: translateY(-26px);
+    opacity: 0;
   }
 
   .quote-author {
@@ -812,10 +840,88 @@
 
       <div class="hud-box">
         <div class="hud-quote">
-          <div class="quote-icon">✦</div>
-          <div class="quote-body">
-            <p>"Seguimos esperando por la conexión."</p>
-            <p class="quote-author">- Kouneli · 20 de Noviembre</p>
+          <div class="quote-avatar-frame" aria-hidden="true">
+            <svg class="quote-avatar-svg" viewBox="3 1 16 21" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="1" width="16" height="21" fill="#ffffff"/>
+              <g id="carrot-normal" fill="#000000">
+                <rect x="9" y="2" width="3" height="1"/>
+                <rect x="13" y="2" width="3" height="1"/>
+                <rect x="8" y="3" width="4" height="1"/>
+                <rect x="13" y="3" width="3" height="1"/>
+                <rect x="8" y="4" width="4" height="1"/>
+                <rect x="13" y="4" width="2" height="1"/>
+                <rect x="16" y="4" width="2" height="1"/>
+                <rect x="8" y="5" width="4" height="1"/>
+                <rect x="13" y="5" width="2" height="1"/>
+                <rect x="16" y="5" width="2" height="1"/>
+                <rect x="9" y="6" width="3" height="1"/>
+                <rect x="13" y="6" width="1" height="1"/>
+                <rect x="15" y="6" width="3" height="1"/>
+                <rect x="12" y="7" width="1" height="1"/>
+                <rect x="14" y="7" width="2" height="1"/>
+                <rect x="8" y="8" width="5" height="1"/>
+                <rect x="14" y="8" width="1" height="1"/>
+                <rect x="16" y="8" width="2" height="1"/>
+                <rect x="7" y="9" width="8" height="1"/>
+                <rect x="16" y="9" width="2" height="1"/>
+                <rect x="7" y="10" width="8" height="1"/>
+                <rect x="16" y="10" width="2" height="1"/>
+                <rect x="6" y="11" width="10" height="1"/>
+                <rect x="6" y="12" width="10" height="1"/>
+                <rect x="6" y="13" width="9" height="1"/>
+                <rect x="5" y="14" width="10" height="1"/>
+                <rect x="5" y="15" width="9" height="1"/>
+                <rect x="5" y="16" width="8" height="1"/>
+                <rect x="4" y="17" width="8" height="1"/>
+                <rect x="4" y="18" width="7" height="1"/>
+                <rect x="4" y="19" width="5" height="1"/>
+                <rect x="4" y="20" width="3" height="1"/>
+              </g>
+              <g id="carrot-broken" fill="#000000" style="display: none;">
+                <rect x="10" y="2" width="3" height="1"/>
+                <rect x="14" y="2" width="3" height="1"/>
+                <rect x="9" y="3" width="4" height="1"/>
+                <rect x="14" y="3" width="3" height="1"/>
+                <rect x="9" y="4" width="4" height="1"/>
+                <rect x="14" y="4" width="2" height="1"/>
+                <rect x="17" y="4" width="1" height="1"/>
+                <rect x="9" y="5" width="4" height="1"/>
+                <rect x="14" y="5" width="2" height="1"/>
+                <rect x="17" y="5" width="1" height="1"/>
+                <rect x="10" y="6" width="3" height="1"/>
+                <rect x="14" y="6" width="1" height="1"/>
+                <rect x="16" y="6" width="2" height="1"/>
+                <rect x="13" y="7" width="1" height="1"/>
+                <rect x="15" y="7" width="2" height="1"/>
+                <rect x="9" y="8" width="5" height="1"/>
+                <rect x="15" y="8" width="1" height="1"/>
+                <rect x="17" y="8" width="1" height="1"/>
+                <rect x="8" y="9" width="8" height="1"/>
+                <rect x="17" y="9" width="1" height="1"/>
+                <rect x="8" y="10" width="8" height="1"/>
+                <rect x="7" y="11" width="3" height="1"/>
+                <rect x="11" y="11" width="2" height="1"/>
+                <rect x="14" y="11" width="2" height="1"/>
+                <rect x="7" y="12" width="2" height="1"/>
+                <rect x="12" y="12" width="1" height="1"/>
+                <rect x="15" y="12" width="1" height="1"/>
+                <rect x="6" y="13" width="1" height="1"/>
+                <rect x="10" y="13" width="1" height="1"/>
+                <rect x="8" y="14" width="2" height="1"/>
+                <rect x="12" y="14" width="2" height="1"/>
+                <rect x="5" y="15" width="3" height="1"/>
+                <rect x="9" y="15" width="5" height="1"/>
+                <rect x="4" y="16" width="9" height="1"/>
+                <rect x="4" y="17" width="8" height="1"/>
+                <rect x="4" y="18" width="7" height="1"/>
+                <rect x="4" y="19" width="5" height="1"/>
+                <rect x="4" y="20" width="3" height="1"/>
+              </g>
+            </svg>
+          </div>
+          <div class="quote-body" id="quote-body">
+            <p id="quote-text">"La conexión se logró con éxito."</p>
+            <p class="quote-author" id="quote-author">- Kouneli</p>
           </div>
         </div>
       </div>
@@ -876,6 +982,44 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    const quotes = [
+      { text: '"La conexión se logró con éxito."', author: '- Kouneli' },
+      { text: '"Preparando el escenario para los jugadores."', author: '- bmunfy' },
+      { text: '"Preparando inventario."', author: '- Scarter' },
+      { text: '"Puliendo las armas."', author: '- Rotrer' },
+      { text: '"Consumiendo la determinación."', author: '- Hirck', broken: true },
+      { text: '"Dándole una charla motivacional a los aldeanos."', author: '- bmunfy' },
+      { text: '"Rezando por que no se crashee."', author: '- bmunfy' },
+      { text: '"Lobotomizando algunos mobs."', author: '- bmunfy' },
+      { text: '"Sembrando los cultivos."', author: '- Leck' },
+      { text: '"Ahuyentando a Rotrer."', author: '- Scarter' }
+    ];
+
+    let quoteIndex = 0;
+    const quoteBody = document.getElementById('quote-body');
+    const quoteText = document.getElementById('quote-text');
+    const quoteAuthor = document.getElementById('quote-author');
+    const carrotNormal = document.getElementById('carrot-normal');
+    const carrotBroken = document.getElementById('carrot-broken');
+
+    function rotateQuote() {
+      quoteBody.classList.add('slide-out-down');
+      setTimeout(() => {
+        quoteIndex = (quoteIndex + 1) % quotes.length;
+        const item = quotes[quoteIndex];
+        quoteText.textContent = item.text;
+        quoteAuthor.textContent = item.author;
+        carrotNormal.style.display = item.broken ? 'none' : 'block';
+        carrotBroken.style.display = item.broken ? 'block' : 'none';
+        quoteBody.classList.remove('slide-out-down');
+        quoteBody.classList.add('slide-in-top');
+        void quoteBody.offsetWidth;
+        quoteBody.classList.remove('slide-in-top');
+      }, 380);
+    }
+
+    setInterval(rotateQuote, 4500);
 
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxtRoCIIQSITLw8y78IwP05AdvhsK_kKb51Ch0suly22m92QCL906-co_vy2CcG1JWI/exec';
     const BASE_ADMITTED = ['Rosx24'];
