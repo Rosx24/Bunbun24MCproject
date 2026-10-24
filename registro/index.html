@@ -240,13 +240,48 @@
 
   .notice {
     width: 100%;
-    padding: 16px 18px;
-    background: rgba(30, 64, 79, 0.45);
-    border-left: 3px solid var(--c-amber);
-    font-size: 0.95rem;
-    line-height: 1.55;
+    padding: 18px 20px;
+    background: rgba(30, 64, 79, 0.55);
+    border: 2px solid var(--c-amber);
+    border-left: 5px solid var(--c-amber);
+    font-size: 0.96rem;
+    line-height: 1.6;
     color: #ffffff;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
+
+  .notice-highlight {
+    display: block;
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: rgba(204, 33, 50, 0.18);
+    border: 2px solid var(--c-red);
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .notice-highlight strong {
+    color: var(--c-cream);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .notice-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-pixel);
+    font-size: 0.6rem;
+    color: var(--c-amber);
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .hl-discord {
+    color: var(--c-amber);
+    font-weight: 700;
   }
 
   .notice.terms-notice { border-left-color: var(--c-cream); color: var(--text-muted); font-size: 0.9rem; }
@@ -393,23 +428,43 @@
   }
 
   .discord-link {
-    display: none;
+    display: block;
     width: 100%;
     text-align: center;
     font-family: var(--font-pixel);
     font-size: 0.75rem;
     letter-spacing: 1.5px;
-    color: #ffffff;
-    background: var(--c-midnight);
-    border: 3px solid var(--c-cream);
+    color: #7f9098;
+    background: #1b262b;
+    border: 3px solid #45545b;
     padding: 16px;
     text-decoration: none;
     box-shadow: 0 6px 0 #0a171d;
     transition: all 0.15s;
+    cursor: not-allowed;
+    opacity: 0.7;
+    user-select: none;
   }
 
-  .discord-link.show { display: block; }
-  .discord-link:hover { background: var(--c-teal); color: var(--c-cream); transform: translateY(-2px); }
+  .discord-link.unlocked {
+    color: #ffffff;
+    background: var(--c-midnight);
+    border-color: var(--c-cream);
+    cursor: pointer;
+    opacity: 1;
+  }
+
+  .discord-link.unlocked:hover {
+    background: var(--c-teal);
+    color: var(--c-cream);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #0a171d;
+  }
+
+  .discord-link.unlocked:active {
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 #0a171d;
+  }
 
   .status-legend {
     display: flex;
@@ -759,9 +814,13 @@
 
       <div class="divider"></div>
 
-      <p class="notice">
-        Un moderador revisará tu solicitud. Vuelve más tarde e ingresa tu Nickname para ver si fue aceptada. Si lo es, recibirás la invitación al Discord.
-      </p>
+      <div class="notice">
+        <span class="notice-badge">✦ AVISO IMPORTANTE ✦</span>
+        <p>Un moderador revisará tu solicitud. Vuelve más tarde e ingresa tu Nickname para consultar tu estado.</p>
+        <span class="notice-highlight">
+          Al ser <span class="hl-discord">ACEPTADO</span>, aquí mismo podrás obtener la <span class="hl-discord">invitación a Discord</span>. Una vez dentro, <strong>es OBLIGATORIO verificarse en Discord</strong> para poder ingresar al servidor.
+        </span>
+      </div>
 
       <div class="form-group" style="margin-top: 14px;">
         <label for="discord-name" class="input-label">
@@ -810,7 +869,7 @@
         </span>
         <button type="button" id="status-btn" class="status-btn idle" disabled>INGRESA TU NICKNAME</button>
         <p id="status-text" class="status-text" aria-live="polite"></p>
-        <a id="discord-link" class="discord-link" href="#" target="_blank" rel="noopener noreferrer">✦ UNIRSE AL DISCORD ✦</a>
+        <a id="discord-link" class="discord-link" target="_blank" rel="noopener noreferrer" aria-disabled="true">✦ UNIRSE AL DISCORD ✦</a>
         <div class="status-legend">
           <span><i style="background: var(--c-olive);"></i>Disponible</span>
           <span><i style="background: var(--c-orange);"></i>Pendiente</span>
@@ -1017,7 +1076,8 @@
       const showInvite = state === 'invited' && /^https:\/\/(discord\.gg|discord\.com\/invite)\//.test(currentInvite);
       if (showInvite) discordLink.href = currentInvite;
       else discordLink.removeAttribute('href');
-      discordLink.classList.toggle('show', showInvite);
+      discordLink.classList.toggle('unlocked', showInvite);
+      discordLink.setAttribute('aria-disabled', String(!showInvite));
 
       switch (state) {
         case 'idle':
@@ -1045,7 +1105,7 @@
         case 'invited':
           statusBtn.textContent = 'ACEPTADO';
           statusText.textContent = showInvite
-            ? '¡Solicitud aceptada! Únete al Discord:'
+            ? '¡Solicitud aceptada! Aquí tienes tu invitación al Discord (recuerda que es OBLIGATORIO verificarte al entrar):'
             : '¡Solicitud aceptada! El enlace de invitación aún no está disponible, contacta a un moderador.';
           break;
         case 'rejected':
@@ -1182,6 +1242,12 @@
     statusBtn.addEventListener('click', () => {
       if (currentState === 'available' && acceptTerms.checked) enviarSolicitud();
       else if (currentState === 'error') update();
+    });
+
+    discordLink.addEventListener('click', (e) => {
+      if (!discordLink.classList.contains('unlocked')) {
+        e.preventDefault();
+      }
     });
 
     const modal = document.getElementById('terms-modal');
